@@ -1,0 +1,11 @@
+#nav_container{
+    background-color: black;
+    padding: 20px 0;
+}
+
+#nav_items{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
