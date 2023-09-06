@@ -4,9 +4,9 @@ import { Container } from 'react-bootstrap'
 
 const Footer = () => {
   return (
-    <div>
+    <div className='bg-black text-white'> 
         <Container id='footer_container'>
-            <div>Footer</div>
+            <div className='fs-2'>NewLIfe</div>
         </Container>
     </div>
   )

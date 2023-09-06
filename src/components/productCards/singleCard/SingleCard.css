@@ -1,0 +1,22 @@
+#container_img{
+    overflow: hidden;
+    background-color: black;
+}
+
+#card_img{
+    object-fit: cover;
+    height: 350px;
+}
+
+#card_title{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 70%;
+}
+
+#card_img:hover{
+    transform: scale(1.03);
+    opacity: 0.8;
+    cursor: pointer;
+}

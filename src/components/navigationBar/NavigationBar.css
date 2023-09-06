@@ -1,11 +1,15 @@
 #nav_container{
     background-color: black;
-    padding: 20px 0;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
-#nav_items{
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#nav_logo{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 3rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }

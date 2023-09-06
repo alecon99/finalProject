@@ -1,0 +1,17 @@
+#card_detail_container{
+    padding-top: 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+#card_container_image{
+    height: 60vh;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+#card_image{
+    height: 60vh;
+    object-fit: cover;
+}
