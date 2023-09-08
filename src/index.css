@@ -16,3 +16,25 @@ code {
   color: rgb(109, 126, 24) !important;
   cursor: pointer;
 }
+
+.hover_link_red:hover{
+  color: red !important;
+  cursor: pointer;
+}
+
+.hover_link_black:hover{
+  color: black !important;
+  cursor: pointer;
+}
+
+.green{
+  color: rgb(109, 126, 24) !important;
+}
+
+.font{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.bg-admin{
+  background-color: rgb(76, 97, 77);
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import '../loginForm/LoginForm.css'
@@ -6,12 +6,13 @@ import '../loginForm/LoginForm.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Col, Container, Row } from 'react-bootstrap';
-
+import { AdminProvider } from '../../context/AdminContext';
 
 const LoginForms = () => {
 
     const navigate = useNavigate()
     const [ loginFormData, setLoginFormData ] = useState({})
+    const { adminRole, isAdmin, setAdminRole } = useContext(AdminProvider)
 
     const onSubmit = async (e)=>{
         e.preventDefault();
@@ -21,7 +22,7 @@ const LoginForms = () => {
             .then((res) => {
               localStorage.setItem("userLoggedIn" , JSON.stringify(res.data.token))
             })
-            .then((res) => navigate("/"))
+            .then(() => navigate("/successLogin"))
       
         } catch (error) {
             console.log("password o email non valida")
@@ -31,7 +32,7 @@ const LoginForms = () => {
 
     const handleLoginGoogle = ()=>{
         window.location.href= `http://localhost:5050/auth/google`
-      }
+    }
 
   return ( 
     <div id='container_login_form'> 
@@ -74,10 +75,10 @@ const LoginForms = () => {
             </Row>
             <div className='fs-1 text-center my-5'>Or</div>
             <div className='d-flex align-items-center justify-content-center'>
-                <h4>log in with</h4>
-                <Button onClick={handleLoginGoogle} variant="dark" type="submit" >
-                GitHub login
-          </Button>
+                <h4 className='m-0'>log in with</h4>
+                <Button className='ms-3' onClick={handleLoginGoogle} variant="dark" type="submit" >
+                    Google login
+                </Button>
             </div>
         </Container>
     </div>

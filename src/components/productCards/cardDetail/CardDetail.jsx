@@ -4,7 +4,7 @@ import '../cardDetail/CardDetail.css'
 
 /* reactBootstrap */
 import { Col, Container, Row } from 'react-bootstrap'
-import AddToCartButton from '../../addToCartButton/AddToCartButton';
+import AddToCartButton from '../../buttons/addToCartButton/AddToCartButton';
 
 const CardDetail = () => {
     
@@ -44,9 +44,9 @@ const CardDetail = () => {
           <Col md={6} xl={8} className='text-center text-md-start d-flex flex-column justify-content-between'>
             <div>
               <h1>{name}</h1>
-              <div className='fs-4'>{description}</div>
+              <div className='fs-4 mb-3'>{description}</div>
             </div>
-            <div className='d-flex justify-content-between align-items-center'>
+            <div className='d-flex justify-content-between align-items-center mx-4 mx-sm-0'>
               <div className='fs-1'>€ {price}</div>
               <AddToCartButton 
               productId={productId} 

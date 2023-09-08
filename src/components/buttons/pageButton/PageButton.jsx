@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { PageSizeProvider } from '../../context/PageSizeContext'
-import { ProductsProvider } from '../../context/ProductsContext'
+import { PageSizeProvider } from '../../../context/PageSizeContext'
+import { ProductsProvider } from '../../../context/ProductsContext'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'

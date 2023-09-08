@@ -8,7 +8,6 @@ const Loginpage = () => {
     <>
       <SimplifiedNavigatioBar/>
       <LoginForms/>
-      <Footer/>
     </>
   )
 }

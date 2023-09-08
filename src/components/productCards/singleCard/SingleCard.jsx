@@ -9,7 +9,7 @@ const SingleCard = ({productProps}) => {
 
   const detail = ()=>{
     navigate(`/detail/${productProps._id}`);
-}
+  }
   return (
     <Card className='border-0 my-3' onClick={detail}>
       <div id='container_img'>

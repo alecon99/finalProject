@@ -11,13 +11,13 @@ export const useSession = ()=>{
     const session = auth();
     const decodedSession = session? jwtDecode(session): null;
 
-    const navigate = useNavigate();
+    /* const navigate = useNavigate(); */
 
-    useEffect(()=>{
-        /* if(!session){
+/*     useEffect(()=>{
+        if(!session){
             navigate('/', { replace: true });
-        } */
-    },[navigate, session]);
+        }
+    },[navigate, session]); */
 
     return decodedSession
 };

@@ -6,8 +6,8 @@ const SimplifiedNavigatioBar = () => {
     <div className='bg-black text-center py-3'>
         <Link 
             to={'/'} 
-            className='text-white text-decoration-none'
-        >logo</Link>
+            className='text-white text-decoration-none font fs-3'
+        >NewLife</Link>
     </div>
   )
 }

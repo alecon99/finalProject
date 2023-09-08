@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { ProductsContext } from './context/ProductsContext';
 import { PageSizeContext } from './context/PageSizeContext';
@@ -9,35 +9,56 @@ import LoginPage from './pages/LoginPage';
 import ProtectedRoutes from './middlewares/ProtectedRoutes';
 import ProductDetailPage from './pages/ProductDetailPage';
 import RegistrationPage from './pages/RegistrationPage';
+import { CartContext } from './context/CartContext';
+import { AdminContext } from './context/AdminContext';
+import SuccessLogin from './pages/SuccessLogin';
+import DisconnectPage from './pages/DisconnectPage';
+import ManageProductPage from './pages/ManageProductPage';
 
 function App() {
   return (
     <PageSizeContext>
-      <ProductsContext>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              exact path='/'
-              element={<Homepage />}
-            />
-            <Route
-              path='/detail/:productId'
-              element={<ProductDetailPage />}
-            />
-            <Route
-              path='/login'
-              element={<LoginPage />}
-            />
-            <Route
-              path='/registration'
-              element={<RegistrationPage />}
-            />
-            <Route element={<ProtectedRoutes/>}>
-              {/* rotte protette */}
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ProductsContext>
+      <AdminContext>
+        <ProductsContext>
+          <CartContext>
+            <BrowserRouter>
+              <Routes>
+                <Route
+                  exact path='/'
+                  element={<Homepage />}
+                />
+                <Route
+                  path='/detail/:productId'
+                  element={<ProductDetailPage />}
+                />
+                <Route
+                  path='/login'
+                  element={<LoginPage />}
+                />
+                <Route
+                  path='/registration'
+                  element={<RegistrationPage />}
+                />
+                <Route
+                    path='/disconnect'
+                    element={<DisconnectPage />}
+                  />
+                <Route element={<ProtectedRoutes />}>
+                  {/* rotte protette */}
+                  <Route
+                    path='/successLogin'
+                    element={<SuccessLogin />}
+                  />
+                  <Route
+                    path='/addProduct'
+                    element={<ManageProductPage />}
+                  />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </CartContext>
+        </ProductsContext>
+      </AdminContext>
     </PageSizeContext>
   );
 }
