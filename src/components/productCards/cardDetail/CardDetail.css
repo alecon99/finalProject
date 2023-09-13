@@ -1,8 +1,6 @@
 #card_detail_container{
     padding-top: 100px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+    height: 100vh;
 }
 
 #card_container_image{

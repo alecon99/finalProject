@@ -11,8 +11,6 @@ const ProductCartCard = () => {
 
     const navigate = useNavigate();
 
-    
-
     useEffect(()=>{
         getCartProducts()
     },[])
@@ -40,7 +38,7 @@ const ProductCartCard = () => {
                             </div>
                         </Col>
                         <Col xs={2} className='pt-2 fs-4'>
-                            <DeleteCartButton productId={product._id}/>
+                            <DeleteCartButton cartId={product._id}/>
                         </Col>
                     </Row>
                 )

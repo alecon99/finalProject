@@ -7,8 +7,8 @@ import { CartProvider } from '../context/CartContext';
 
 const SuccessLogin = () => {
 
-    const { adminRole, setAdminRole } = useContext(AdminProvider)
-    const { cartProducts, setCartProducts, cartCounter, isLoading, getCartProducts } = useContext(CartProvider)
+    const { setAdminRole } = useContext(AdminProvider)
+    const {  getCartProducts } = useContext(CartProvider)
 
     const session = useSession();
     const navigate = useNavigate();

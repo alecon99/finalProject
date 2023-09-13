@@ -2,14 +2,17 @@ import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { CartProvider } from '../../../context/CartContext'
+import { useSession } from '../../../middlewares/ProtectedRoutes'
 
-const DeleteCartButton = ({productId}) => {
+const DeleteCartButton = ({cartId}) => {
+
+    const session = useSession()
 
     const { cartProducts, cartCounter, isLoading, productsCartSum, getCartProducts } = useContext(CartProvider)
 
     const deleteCartProduct = async () => {
         try {   
-            const response = await fetch(`http://localhost:5050/cart/deleteProduct/` + productId, {
+            const response = await fetch(`http://localhost:5050/cart/deleteProduct/${cartId}/${session.id}`, {
                 method: "DELETE"
             });
     

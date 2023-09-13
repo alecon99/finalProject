@@ -1,6 +1,5 @@
 #container_img{
     overflow: hidden;
-    background-color: black;
 }
 
 #card_img{
@@ -17,6 +16,11 @@
 
 #card_img:hover{
     transform: scale(1.03);
-    opacity: 0.8;
     cursor: pointer;
+}
+
+#not_available{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

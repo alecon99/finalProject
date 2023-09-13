@@ -8,7 +8,6 @@ const ProductDetailPage = () => {
     <>
       <NavigationBar/>
       <CardDetail/>
-      <Footer/>
     </>
   )
 }

@@ -14,6 +14,8 @@ import { AdminContext } from './context/AdminContext';
 import SuccessLogin from './pages/SuccessLogin';
 import DisconnectPage from './pages/DisconnectPage';
 import ManageProductPage from './pages/ManageProductPage';
+import { ModalModifyContex } from './context/ModalModifyProductContext';
+import { SelectedProductContex } from './context/SelectedProduct';
 
 function App() {
   return (
@@ -21,41 +23,45 @@ function App() {
       <AdminContext>
         <ProductsContext>
           <CartContext>
-            <BrowserRouter>
-              <Routes>
-                <Route
-                  exact path='/'
-                  element={<Homepage />}
-                />
-                <Route
-                  path='/detail/:productId'
-                  element={<ProductDetailPage />}
-                />
-                <Route
-                  path='/login'
-                  element={<LoginPage />}
-                />
-                <Route
-                  path='/registration'
-                  element={<RegistrationPage />}
-                />
-                <Route
-                    path='/disconnect'
-                    element={<DisconnectPage />}
-                  />
-                <Route element={<ProtectedRoutes />}>
-                  {/* rotte protette */}
-                  <Route
-                    path='/successLogin'
-                    element={<SuccessLogin />}
-                  />
-                  <Route
-                    path='/addProduct'
-                    element={<ManageProductPage />}
-                  />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+            <ModalModifyContex>
+              <SelectedProductContex>
+                <BrowserRouter>
+                  <Routes>
+                    <Route
+                      exact path='/'
+                      element={<Homepage />}
+                    />
+                    <Route
+                      path='/detail/:productId'
+                      element={<ProductDetailPage />}
+                    />
+                    <Route
+                      path='/login'
+                      element={<LoginPage />}
+                    />
+                    <Route
+                      path='/registration'
+                      element={<RegistrationPage />}
+                    />
+                    <Route
+                      path='/disconnect'
+                      element={<DisconnectPage />}
+                    />
+                    <Route element={<ProtectedRoutes />}>
+                      {/* rotte protette */}
+                      <Route
+                        path='/successLogin'
+                        element={<SuccessLogin />}
+                      />
+                      <Route
+                        path='/addProduct'
+                        element={<ManageProductPage />}
+                      />
+                    </Route>
+                  </Routes>
+                </BrowserRouter>
+              </SelectedProductContex>
+            </ModalModifyContex>
           </CartContext>
         </ProductsContext>
       </AdminContext>
