@@ -1,10 +1,8 @@
 #container_login_form{
     height: 100vh;
-    padding-top: 150px;
-    background: linear-gradient(-45deg ,#90a23661, #76d6f65f, #b5c37e58);
+    background: linear-gradient(-45deg ,#93a5369d, #53b3d382, #2c529f8e);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
-	height: 100vh;
 }
 
 #login_form{
@@ -21,4 +19,11 @@
 	100% {
 		background-position: 0% 50%;
 	}
+}
+
+#registration_form{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }

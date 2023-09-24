@@ -10,9 +10,17 @@ const LoginForms = () => {
 
     const navigate = useNavigate()
     const [ loginFormData, setLoginFormData ] = useState({})
+    const [ password, setVerifyPassword ] = useState(null)
+    const [ error , setError ] = useState(false)
 
-    const onSubmit = async (e)=>{
-        e.preventDefault();
+    const verifyCredentials = ()=>{
+        if(loginFormData.password === password){
+            registration()
+        }
+        setError(true)
+    }
+
+    const registration = async ()=>{
         
         try {
             await axios.post(`http://localhost:5050/user/registration`,loginFormData)
@@ -20,13 +28,13 @@ const LoginForms = () => {
       
         } catch (error) {
             console.log("password o email non valida")
-            alert("inserisci password e email")
+            setError(true)
         }    
     }
 
   return ( 
     <div id='container_login_form'> 
-        <Container>
+        <Container id='registration_form'>
             <Row className='d-flex align-items-center'>
                 <Col sm={6} >
                     <h1 className='text-center text-sm-end  me-sm-4'>Insert your data</h1>
@@ -34,11 +42,10 @@ const LoginForms = () => {
                 <Col sm={6}>
                     <div className='d-flex justify-content-center d-sm-block'>
                         <Form 
-                        onSubmit={onSubmit}
                         id='login_form'
                         className='ms-sm-4 '
                         >
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control type="text" onChange={(e)=> setLoginFormData({
                                         ...loginFormData,
@@ -47,7 +54,7 @@ const LoginForms = () => {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" controlId="formBasicSurname">
                                 <Form.Label>Surname</Form.Label>
                                 <Form.Control type="text" onChange={(e)=> setLoginFormData({
                                         ...loginFormData,
@@ -67,25 +74,32 @@ const LoginForms = () => {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
+                                <Form.Control type="text" onChange={(e)=> setVerifyPassword(e.target.value)}
+                                />
+                                
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+                                <Form.Label>Confirm password</Form.Label>
                                 <Form.Control type="password" onChange={(e)=> setLoginFormData({
                                         ...loginFormData,
                                         password: e.target.value
                                     })}
                                 />
                             </Form.Group>
-                            <Button variant="success" type="submit">
+                            <div className='d-flex align-items-center'>
+                            <Button variant="dark" onClick={verifyCredentials}>
                                 sign in
                             </Button>
+                            {error ?
+                                <div className='ms-3 text-danger'>Enter the data correctly</div>
+                                :
+                                null
+                            }
+                            </div>
                         </Form>
                     </div>
-                    
                 </Col>
             </Row>
-            <div className='fs-1 text-center my-5'>Or</div>
-            <div className='d-flex align-items-center justify-content-center'>
-                <h4>log in with</h4>
-                <Button className='ms-3'>google</Button>
-            </div>
         </Container>
     </div>
   )

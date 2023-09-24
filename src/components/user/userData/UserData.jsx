@@ -5,8 +5,10 @@ import { Container, Modal } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import AddUserAddress from './addUserAddress/AddUserAddress'
 import { UsersProvider } from '../../../context/UserContext'
+
+import AddUserAddress from './addUserAddress/AddUserAddress'
+import ModLoginData from './modLoginData/ModLoginData'
 import ModPersonalData from './modPersonalData/ModPersonalData'
 
 const UserData = () => {
@@ -15,18 +17,12 @@ const UserData = () => {
 
     const [showAddressModal, setShowAddressModal] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
-
-    const handleOpenAddressModal = () => {
-        setShowAddressModal(true);
-    }
-
-    const handleOpenLoginModal = () => {
-        setShowLoginModal(true);
-    }
+    const [showPersonalModal, setShowPersonalModal] = useState(false)
 
     const handleClose = () => {
         setShowAddressModal(false);
         setShowLoginModal(false)
+        setShowPersonalModal(false)
     }
 
     useEffect(() => {
@@ -38,7 +34,20 @@ const UserData = () => {
             <div className='border-bottom my-2 p-2'>
                 <div className='d-flex align-items-center'>
                     <h1>Personal data</h1>
-                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} />
+                    <Modal
+                        show={showPersonalModal}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton>
+                        <Modal.Title className='mb-2'>Personal data</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ModPersonalData setShow={setShowPersonalModal}/>
+                    </Modal.Body>
+                    </Modal>
+                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={()=> setShowPersonalModal(true)} />
                 </div>
                 <div>
                     <div>Name: {user.name}</div>
@@ -68,10 +77,10 @@ const UserData = () => {
                         <Modal.Title className='mb-2'>Login user</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ModPersonalData setShow={setShowLoginModal}/>
+                        <ModLoginData setShow={setShowLoginModal}/>
                     </Modal.Body>
                     </Modal>
-                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={handleOpenLoginModal}/>
+                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={()=>setShowLoginModal(true)}/>
                 </div>
                 <div>
                     <div>Email: {user.email}</div>
@@ -95,11 +104,11 @@ const UserData = () => {
                     </Modal.Body>
                     </Modal>
                     {user.shippingAddress ?
-                        <div onClick={handleOpenAddressModal} className='m-3 hover_link'>
+                        <div onClick={()=>setShowAddressModal(true)} className='m-3 hover_link'>
                             <FontAwesomeIcon className='fs-5' icon={faPencil} />
                         </div>
                         :
-                        <div onClick={handleOpenAddressModal} className='m-3 hover_link'>
+                        <div onClick={()=>setShowAddressModal(true)} className='m-3 hover_link'>
                             <FontAwesomeIcon className='fs-5' icon={faPlus} />
                         </div>
                     }

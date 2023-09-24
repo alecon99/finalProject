@@ -20,11 +20,13 @@ const AddUserAddress = ({ setShow }) => {
     const [country, setCountry] = useState(null)
 
     useEffect(() => {
-        setAddress(user.shippingAddress.address)
-        setCity(user.shippingAddress.city)
-        setState(user.shippingAddress.state)
-        setZipCode(user.shippingAddress.zipCode)
-        setCountry(user.shippingAddress.country)
+        if (user.shippingAddress) {
+            setAddress(user.shippingAddress.address)
+            setCity(user.shippingAddress.city)
+            setState(user.shippingAddress.state)
+            setZipCode(user.shippingAddress.zipCode)
+            setCountry(user.shippingAddress.country)
+        }
     }, [])
 
     const addAddress = async () => {
@@ -60,27 +62,27 @@ const AddUserAddress = ({ setShow }) => {
         <Form>
             <Form.Group className="mb-3" controlId="formBasicAddress">
                 <div>Address</div>
-                <Form.Control placeholder={user.shippingAddress.address} type="text" onChange={(e) => setAddress(e.target.value)} />
+                <Form.Control placeholder={address} type="text" onChange={(e) => setAddress(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCity">
                 <div>City</div>
-                <Form.Control placeholder={user.shippingAddress.city} type="text" onChange={(e) => setCity(e.target.value)} />
+                <Form.Control placeholder={city} type="text" onChange={(e) => setCity(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicState">
                 <div>State</div>
-                <Form.Control placeholder={user.shippingAddress.state} type="text" onChange={(e) => setState(e.target.value)} />
+                <Form.Control placeholder={state} type="text" onChange={(e) => setState(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicZipCode">
                 <div>ZipCode/PostalCode</div>
-                <Form.Control placeholder={user.shippingAddress.zipCode} type="number" step=".01" onChange={(e) => setZipCode(e.target.value)} />
+                <Form.Control placeholder={zipCode} type="number" step=".01" onChange={(e) => setZipCode(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCountry">
                 <div>Country/Province</div>
-                <Form.Control placeholder={user.shippingAddress.country} type="text" onChange={(e) => setCountry(e.target.value)} />
+                <Form.Control placeholder={country} type="text" onChange={(e) => setCountry(e.target.value)} />
             </Form.Group>
 
             <div className='mt-3 d-flex justify-content-between'>

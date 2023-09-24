@@ -1,48 +1,96 @@
-import { useContext, useState } from 'react'
-import { Button, Form } from 'react-bootstrap';
-import { useSession } from '../../../../middlewares/ProtectedRoutes';
+import { useContext, useState, useEffect } from 'react'
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { UsersProvider } from '../../../../context/UserContext';
+import { useSession } from '../../../../middlewares/ProtectedRoutes';
 
-const ModPersonalData = ({ setShowLoginModal }) => {
-
-    const session = useSession();
+const ModPersonalData = ({ setShow }) => {
 
     const { getUserById, user } = useContext(UsersProvider)
 
-    const [formLoginData, setFormLoginData] = useState({})
+    const session = useSession()
+
+    const [phoneNumber, setPhoneNumber] = useState({})
+    const [personalData, setPersonalData] = useState({})
+
+    useEffect(() => {
+        if (user.phone) {
+            setPhoneNumber({
+                prefix: user.phone.prefix,
+                number: user.phone.number
+            })
+        }
+    }, [])
+
+    const modPersonalData = async () => {
+
+        const payload = {
+            name: personalData.name,
+            surname: personalData.surname,
+            phone: {
+                prefix: phoneNumber.prefix,
+                number: phoneNumber.number
+
+            }
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5050/user/modPersonalData/${session.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            getUserById()
+            setShow(false)
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <Form>
             <div className='text-center fs-4'>Edit</div>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <div>Email</div>
-                <Form.Control placeholder={user.email} type="text" onChange={(e) => setFormLoginData({
-                    ...formLoginData,
-                    email: e.target.value
+            <Form.Group className="mb-3" controlId="formBasicName">
+                <div>Name</div>
+                <Form.Control placeholder={user.name} type="text" onChange={(e) => setPersonalData({
+                    ...personalData,
+                    name: e.target.value
                 })} />
             </Form.Group>
-            <div className='text-center fs-4 my-3'>and/or</div>
-            <div>Password</div>
-            <div className='border rounded p-2'>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <div>old</div>
-                    <Form.Control type="text" onChange={(e) => setFormLoginData({
-                        ...formLoginData,
-                        password: e.target.value
-                    })} />
-                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <div>new</div>
-                    <Form.Control type="password" onChange={(e) => setFormLoginData({
-                        ...formLoginData,
-                        password: e.target.value
-                    })} />
-                </Form.Group>
-            </div>
+            <Form.Group className="mb-3" controlId="formBasicSurname">
+                <div>Surname</div>
+                <Form.Control type="text" placeholder={user.surname} onChange={(e) => setPersonalData({
+                    ...personalData,
+                    surname: e.target.value
+                })} />
+            </Form.Group>
 
-            <div className='mt-3 d-flex justify-content-between'>
-                <Button variant="success" >
+            <Form.Group className="mb-3" controlId="formBasicPhone">
+                <div>Phone</div>
+                <Row className='d-flex border p-2 mx-1 rounded'>
+                    <Col xs={3}>
+                        <div>prefix</div>
+                        <Form.Control type="number" placeholder={phoneNumber.prefix} onChange={(e) => setPhoneNumber({
+                            ...phoneNumber,
+                            prefix: e.target.value
+                        })} />
+                    </Col>
+                    <Col>
+                        <div>number</div>
+                        <Form.Control type="text" placeholder={phoneNumber.number} onChange={(e) => setPhoneNumber({
+                            ...phoneNumber,
+                            number: e.target.value
+                        })} />
+                    </Col>
+                </Row>
+            </Form.Group>
+
+            <div className='mt-3 d-flex align-items-center'>
+                <Button variant="success" onClick={modPersonalData} >
                     Save
                 </Button>
             </div>

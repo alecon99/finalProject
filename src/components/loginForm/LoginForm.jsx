@@ -36,7 +36,7 @@ const LoginForms = () => {
     return (
 
         <div id='container_login_form'>
-            <Container>
+            <Container id='registration_form'> 
                 <Row className='d-flex align-items-center'>
                     <Col sm={6} >
                         <h1 className='text-center text-sm-end  me-sm-4'>Insert your credentials</h1>
@@ -79,13 +79,6 @@ const LoginForms = () => {
                         </div>
                     </Col>
                 </Row>
-                <div className='fs-1 text-center my-5'>Or</div>
-                <div className='d-flex align-items-center justify-content-center'>
-                    <h4 className='m-0'>log in with</h4>
-                    <Button className='ms-3' onClick={handleLoginGoogle} variant="dark" type="submit" >
-                        Google login
-                    </Button>
-                </div>
             </Container>
         </div>
     )
