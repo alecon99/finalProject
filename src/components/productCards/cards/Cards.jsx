@@ -5,8 +5,7 @@ import SingleCard from '../singleCard/SingleCard'
 import '../cards/Cards.css'
 
 /* reactBootstrap */
-import { Col, Container, Row, Spinner } from 'react-bootstrap'
-import { CartProvider } from '../../../context/CartContext'
+import { Col, Container, Row } from 'react-bootstrap'
 
 const Cards = () => {
 
