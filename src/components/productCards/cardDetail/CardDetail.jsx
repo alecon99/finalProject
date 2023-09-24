@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import '../cardDetail/CardDetail.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRotate, faTruck } from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane, faRotate } from '@fortawesome/free-solid-svg-icons'
 
 import { useSession } from '../../../middlewares/ProtectedRoutes'
 
@@ -21,8 +21,6 @@ const CardDetail = () => {
 
   const [productDetail, setProductDetail] = useState({})
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(productDetail);
 
   useEffect(() => {
     getProductDetail()
@@ -43,11 +41,11 @@ const CardDetail = () => {
   const { name, description, price, category, image, availability } = productDetail
 
   return (
-    <div id='card_detail_container' className='font d-flex align-items-center'>
+    <div className='padding_top_100 pb-5 font d-flex align-items-center'>
       <Container>
         <Row>
           <Col md={6} xl={4} className='text-center text-md-end'>
-            <div id='card_container_image'>
+            <div id='card_container_image' className='border'>
               <img id='card_image' src={image} alt="" />
             </div>
           </Col>
@@ -64,37 +62,40 @@ const CardDetail = () => {
                 :
                 <div className='text-danger pb-2'>Product currently not available</div>
               }
-              <div><FontAwesomeIcon icon={faTruck} /> Free shipping from €50</div>
+              <div><FontAwesomeIcon icon={faPaperPlane} /> Free shipping from €50</div>
               <div><FontAwesomeIcon icon={faRotate} /> Easy returns within 60 days</div>
-              <div className='d-flex justify-content-between align-items-center mx-4 mx-sm-0'>
-                <div className='fs-1'>
-                  € {price}
-                  <span className='fs-6 ms-2'>TAX incl.</span>
-                </div>
-
-                {availability && session ?
-                  <AddToCartButton
-                    productId={productId}
-                    productName={name}
-                    productPrice={price}
-                    productImg={image}
-                  />
-                  :
-                  null
-                }
-                {!availability || session ?
-                null
-                :
-                <div className='text-center'>
-                  <div>To add to cart</div>
-                  <div className='d-flex'>
-                  <Link className='hover_link text-decoration-none text-black' to={'/login'} >register</Link>
-                    <div className='mx-1'>or</div>
-                    <Link className='hover_link text-decoration-none text-black' to={'/login'} >log in</Link>
+              <Row>
+                <Col lg={6}>
+                  <div className='fs-1'>
+                    € {price}
+                    <span className='fs-6 ms-2'>TAX incl.</span>
                   </div>
-                </div>
-              }
-              </div>
+                </Col>
+                <Col lg={6} className='px-5 py-2 px-sm-0'>
+                  {availability && session ?
+                    <AddToCartButton
+                      productId={productId}
+                      productName={name}
+                      productPrice={price}
+                      productImg={image}
+                    />
+                    :
+                    null
+                  }
+                  {!availability || session ?
+                    null
+                    :
+                    <div className='d-flex justify-content-center fs-5'>
+                      <div>To add to cart</div>
+                      <div className='d-flex'>
+                        <Link className='green text-decoration-none text-black mx-1 fw-bold' to={'/login'} >Register</Link>
+                        <div className='mx-1'>or</div>
+                        <Link className='green text-decoration-none text-black fw-bold' to={'/login'} >Log in</Link>
+                      </div>
+                    </div>
+                  }
+                </Col>
+              </Row>
             </div>
           </Col>
         </Row>

@@ -1,0 +1,10 @@
+#cart_button{
+    position: fixed;
+    right: 15px;
+    bottom: 20px;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    padding-top: 14px;
+    z-index: 10;
+}

@@ -21,6 +21,8 @@
 
 #not_available{
     position: absolute;
+    z-index: 1;
     right: 10px;
     top: 10px;
+    cursor: pointer;
 }

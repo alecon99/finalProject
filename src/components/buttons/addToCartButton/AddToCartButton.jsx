@@ -1,61 +1,71 @@
 import { useContext, useState } from 'react'
 import { useSession } from '../../../middlewares/ProtectedRoutes'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import { CartProvider } from '../../../context/CartContext'
 
-const AddToCartButton = ({productId,productName,productPrice,productImg}) => {
+import '../addToCartButton/AddToCartButton.css'
 
-    const { cartProducts, cartCounter, isLoading, getCartProducts } = useContext(CartProvider)
+const AddToCartButton = ({ productId, productName, productPrice, productImg }) => {
 
-    const [ show, setShow ] = useState(false)
+    const { setShow, getCartProducts } = useContext(CartProvider)
+
+    const [productQuantity, setProductQuantity] = useState(1)
 
     const session = useSession();
 
-    const showTimeout = ()=>{
-        setTimeout( showStop, 4000);
+    const increaseProductQuantity = () => {
+        if (productQuantity < 20)
+            setProductQuantity(productQuantity + 1)
     }
 
-    const showStop = ()=>{
-        setShow(false)
+    const decreaseProductQuantity = () => {
+        if (productQuantity > 1)
+            setProductQuantity(productQuantity - 1)
     }
 
-    const addToCart = async ()=>{
-        try {               
-            const newProductCart = {
-                userId: session.id,
-                product: {
-                    id: productId,
-                    name: productName,
-                    price: productPrice,
-                    img: productImg
-                },
-                quantity: 1
-            };
+    const addToCart = async () => {
 
-        const response = await fetch(`http://localhost:5050/newCart/` + session.id, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
+        const newProductCart = {
+            product: {
+                id: productId,
+                name: productName,
+                price: productPrice,
+                img: productImg
             },
-            body: JSON.stringify(newProductCart),
-        });
-            setShow(true)
-            showTimeout()
+            quantity: productQuantity
+        };
+
+        try {
+
+            const response = await fetch(`http://localhost:5050/newCart/` + session.id, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newProductCart),
+            });
             getCartProducts()
+            setShow(true)
+            setProductQuantity(1)
             return response.json();
         } catch (error) {
             console.error("Failed to save the product");
         }
     }
 
-  return (
-    <div className='d-flex align-items-center'>
-        <div className={`me-4 bg-black text-white p-2 rounded-3 ${show ? null : 'd-none'}`}>added to cart</div>
-        <div className='hover_link fs-3 ' onClick={addToCart}><FontAwesomeIcon icon={faPlus} /><FontAwesomeIcon icon={faCartShopping} /></div>
-    </div>
-  )
+    return (
+        <div className='d-flex justify-content-center align-items-center bg-dark rounded-3 text-white p-2 fs-5'>
+            {/*         <div className={`me-4 bg-black text-white p-2 rounded-3 ${show ? null : 'd-none'}`}>added to cart</div> */}
+            <div className='d-flex align-items-center me-4'>
+                <div onClick={increaseProductQuantity} className='hover_link'><FontAwesomeIcon icon={faPlus} /></div>
+                <div id='product_quantity' className='mx-2 text-center'>{productQuantity}</div>
+                <div onClick={decreaseProductQuantity} className='hover_link'><FontAwesomeIcon icon={faMinus} /></div>
+            </div>
+            <div className='hover_link' onClick={addToCart}>Add to cart</div>
+        </div>
+    )
 }
 
 export default AddToCartButton

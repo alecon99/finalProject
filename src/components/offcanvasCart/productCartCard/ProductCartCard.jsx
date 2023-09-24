@@ -1,50 +1,46 @@
 import { useEffect, useContext } from 'react'
 import { CartProvider } from '../../../context/CartContext'
-import '../productCartCard/ProductCartCard.css'
-import { Col, Row } from 'react-bootstrap'
 import DeleteCartButton from '../../buttons/deleteCartButton/DeleteCartButton'
-import { useNavigate } from 'react-router-dom';
 
 const ProductCartCard = () => {
 
-    const { cartProducts, cartCounter, isLoading, getCartProducts } = useContext(CartProvider)
+    const { setShow, cartProducts, getCartProducts } = useContext(CartProvider)
 
-    const navigate = useNavigate();
-
-    useEffect(()=>{
+    useEffect(() => {
         getCartProducts()
-    },[])
+    }, [])
 
-  return (
-    <div>
-        {cartProducts && cartProducts.map((product)=>{
+    return (
+        <div>
+            {cartProducts && cartProducts.map((product) => {
 
-            const detail = ()=>{
-            navigate(`/detail/${product.product.id}`);
-            }
+                const detail = () => {
+                    setShow(false)
+                    window.open(`/detail/${product.product.id}`, "_blank", "noreferrer");
+                }
 
-                return(
-                    <Row className='my-4' key={product._id} >
-                        <Col xs={2} className='text-center'>
-                            <img id='card_cart_img' src={product.product.img} alt="" />
-                        </Col>
-                        <Col xs={8}>
-                            <div onClick={detail} className='hover_link'>
-                                <div id='card_cart_name' >{product.product.name}</div>
+                return (
+                    <div className=' d-flex justify-content-between align-items-center border-bottom py-2' key={product._id} >
+                        <div className='d-flex'>
+                            <div className='d-flex notification_badge_container text-center'>
+                                <div className='bg-secondary text-white notification_badge'>{product.quantity}</div>
+                                <img className='round_image' src={product.product.img} alt={product.product.name} />
+                            </div>
+                            <div onClick={detail} className='hover_link ms-3'>
+                                <div>{product.product.name}</div>
                                 <div className='d-flex justify-content-between'>
                                     <div>€ {product.product.price}</div>
-                                    <div>Qt: {product.quantity}</div>
                                 </div>
                             </div>
-                        </Col>
-                        <Col xs={2} className='pt-2 fs-4'>
-                            <DeleteCartButton cartId={product._id}/>
-                        </Col>
-                    </Row>
+                        </div>
+                        <div className='fs-4 px-2'>
+                            <DeleteCartButton cartId={product._id} />
+                        </div>
+                    </div>
                 )
             })}
-    </div>
-  )
+        </div>
+    )
 }
 
 export default ProductCartCard

@@ -3,23 +3,20 @@ import { useSession } from '../middlewares/ProtectedRoutes'
 import { useNavigate } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { AdminProvider } from '../context/AdminContext';
-import { CartProvider } from '../context/CartContext';
 
 const SuccessLogin = () => {
 
     const { setAdminRole } = useContext(AdminProvider)
-    const {  getCartProducts } = useContext(CartProvider)
 
     const session = useSession();
     const navigate = useNavigate();
 
     const Timeout = ()=>{
-        setTimeout( redirect, 4000);
+        setTimeout( redirect, 3000);
         isAdmin()
     }
 
     const redirect = ()=>{
-        getCartProducts()
         navigate(`/`);
     }
 
@@ -50,9 +47,7 @@ const SuccessLogin = () => {
                 <span className="visually-hidden">Loading...</span>
             </Spinner>
         </div>
-        
     </div>
-    
   )
 }
 

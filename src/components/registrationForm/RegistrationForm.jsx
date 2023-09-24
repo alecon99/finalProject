@@ -27,7 +27,7 @@ const LoginForms = () => {
   return ( 
     <div id='container_login_form'> 
         <Container>
-            <Row className='d-flex align-items-center mt-5'>
+            <Row className='d-flex align-items-center'>
                 <Col sm={6} >
                     <h1 className='text-center text-sm-end  me-sm-4'>Insert your data</h1>
                 </Col>

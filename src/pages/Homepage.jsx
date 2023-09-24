@@ -4,16 +4,20 @@ import Footer from '../components/footer/Footer'
 import Jumbotron from '../components/jumbotron/Jumbotron'
 import Cards from '../components/productCards/cards/Cards'
 import PageButton from '../components/buttons/pageButton/PageButton'
+import OffcanvasCart from '../components/offcanvasCart/OffcanvasCart'
+import CartButton from '../components/buttons/cartButton/CartButton'
 
 const Homepage = () => {
-  
+
   return (
     <>
-        <NavigationBar/>
-        <Jumbotron/>
-        <Cards/>
-        <PageButton/>
-        <Footer/>
+      <NavigationBar />
+      <OffcanvasCart />
+      <Jumbotron />
+      <Cards />
+      <PageButton />
+      <CartButton />
+      <Footer />
     </>
   )
 }

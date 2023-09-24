@@ -7,6 +7,7 @@ export const CartContext = ({ children }) => {
 
     const session = useSession();
 
+    const [ show, setShow ] = useState(false)
     const [cartProducts, setCartProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [totalPrice, setTotalPrice] = useState("")
@@ -29,15 +30,21 @@ export const CartContext = ({ children }) => {
     const productsCartSum = () => {
 
         let sum = 0;
+        let partialSum = 0;
+        
 
         for (let i = 0; i < cartProducts.length; i++) {
-            sum += cartProducts[i].product.price;
+
+            partialSum = cartProducts[i].product.price * cartProducts[i].quantity
+            sum += partialSum;
         }
-        setTotalPrice(sum)
+        
+        let rounded = Math.round((sum + Number.EPSILON) * 100) / 100;
+        setTotalPrice(rounded)
     }
 
     return (
-        <CartProvider.Provider value={{ cartProducts, setCartProducts, cartCounter, totalPrice, isLoading, productsCartSum, getCartProducts }}>
+        <CartProvider.Provider value={{ cartProducts, setCartProducts, cartCounter, totalPrice, isLoading, show, setShow, productsCartSum, getCartProducts }}>
             {children}
         </CartProvider.Provider>
     )

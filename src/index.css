@@ -1,40 +1,79 @@
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
 }
 
-.hover_link:hover{
-  color: rgb(109, 126, 24) !important;
+.hover_link:hover {
+  color: rgb(165, 186, 59) !important;
   cursor: pointer;
 }
 
-.hover_link_red:hover{
+.hover_link_red:hover {
   color: red !important;
   cursor: pointer;
 }
 
-.hover_link_black:hover{
+.hover_link_black:hover {
   color: black !important;
   cursor: pointer;
 }
 
-.green{
-  color: rgb(109, 126, 24) !important;
+.green {
+  color: #a5ba3b !important;
 }
 
-.font{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+.bg-admin {
+  background-color: rgb(71, 88, 71);
 }
 
-.bg-admin{
-  background-color: rgb(76, 97, 77);
+.bg-green {
+  background-color: rgb(165, 186, 59);
+}
+
+.padding_top_100 {
+  padding-top: 100px;
+}
+
+.font_size_xs {
+  font-size: 12px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification_badge_container {
+  position: relative;
+}
+
+.notification_badge {
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  left: 40px;
+  font-size: 14px;
+}
+
+.round_image {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid grey;
 }

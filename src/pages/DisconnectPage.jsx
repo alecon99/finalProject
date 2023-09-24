@@ -12,7 +12,7 @@ const DisconnectPage = () => {
     const { adminRole, isAdmin, setAdminRole } = useContext(AdminProvider)
 
     const Timeout = ()=>{
-        setTimeout( redirect, 4000);
+        setTimeout( redirect, 3000);
         localStorage.clear()
         setAdminRole(false)
         setCartProducts([])

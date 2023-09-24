@@ -12,7 +12,7 @@ const SingleCard = ({productProps}) => {
   }
   return (
     <Card className='border-0 my-3' onClick={detail}>
-      <div id='container_img'>
+      <div id='container_img' className='border'>
         {productProps.availability ? 
           null
           :
@@ -22,7 +22,7 @@ const SingleCard = ({productProps}) => {
         <Card.Img id='card_img' className='rounded-0' src={productProps.image} alt={productProps.name} />
       </div>
       <Card.Body className='p-0'>
-        <div className={`d-flex justify-content-between ${productProps.availability ? null:'text-danger'}`}>
+        <div className='d-flex justify-content-between'>
           <Card.Text id='card_title'className='m-0'>{productProps.name}</Card.Text>
           <Card.Text>€ {productProps.price}</Card.Text>
         </div>

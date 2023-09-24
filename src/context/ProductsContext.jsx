@@ -10,7 +10,8 @@ export const ProductsContext = ({ children }) => {
     const [ products, setProducts ] = useState([]);
     const [ allProducts, setAllProducts ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
-    const [ productsCounter, setProductsCounter ] = useState("")
+    const [ partialProductsCounter, setPartialProductsCounter ] = useState(null)
+    const [ productsCounter, setProductsCounter ] = useState(null)
 
     useEffect(()=>{
         getProducts()
@@ -21,6 +22,7 @@ export const ProductsContext = ({ children }) => {
             setIsLoading(true)
             const data = await fetch(`http://localhost:5050/products?pageSize=${pageSize}`)
             const response = await data.json()
+            setPartialProductsCounter(response.counter)
             setProducts(response.products)
             setIsLoading(false)
         } catch (error) {
@@ -42,7 +44,7 @@ export const ProductsContext = ({ children }) => {
     }
 
     return(
-        <ProductsProvider.Provider value={{ products, allProducts, productsCounter, isLoading,getAllProducts, getProducts }}>
+        <ProductsProvider.Provider value={{ products, allProducts, partialProductsCounter, productsCounter, isLoading, getAllProducts, getProducts }}>
             {children}
         </ProductsProvider.Provider>
     )

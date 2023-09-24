@@ -1,0 +1,11 @@
+.info_checkout{
+    width: 70px;
+}
+
+.packages-info{
+    width: 50%;
+}
+
+#checkout_container{
+    min-height: 98vh;
+}

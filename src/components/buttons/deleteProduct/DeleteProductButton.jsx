@@ -20,7 +20,7 @@ const DeleteProductButton = ({productId}) => {
             setShow(false)
     
         } catch (error) {
-            console.error("Failed to delete the comment");
+            console.error("Failed to delete the product");
         }
 };
 

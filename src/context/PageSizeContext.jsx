@@ -7,7 +7,7 @@ export const PageSizeContext = ({ children }) => {
     const [ pageSize, setPageSize ] = useState(24);
 
     const pageIncrement = ()=>{
-        setPageSize(pageSize + 12)
+        setPageSize(pageSize + 24)
     }
 
     return(
