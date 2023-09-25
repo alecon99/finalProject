@@ -10,7 +10,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 const CartButton = () => {
 
-  const { setShow, cartCounter } = useContext(CartProvider)
+  const { setShow, cartCounter, getCartProducts } = useContext(CartProvider)
 
   const showCart = () => {
     setShow(true)

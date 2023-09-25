@@ -1,4 +1,5 @@
 import React from 'react'
+
 import NavigationBar from '../components/navigationBar/NavigationBar'
 import OffcanvasCart from '../components/offcanvasCart/OffcanvasCart'
 import UserOrder from '../components/user/userOrders/UserOrder'
@@ -9,8 +10,8 @@ const UserOrdersPage = () => {
         <>
             <NavigationBar />
             <OffcanvasCart />
-            <UserOrder/>
-            <Homebutton/>
+            <UserOrder />
+            <Homebutton />
         </>
     )
 }

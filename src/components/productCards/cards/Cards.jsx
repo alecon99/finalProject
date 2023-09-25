@@ -6,10 +6,11 @@ import '../cards/Cards.css'
 
 /* reactBootstrap */
 import { Col, Container, Row } from 'react-bootstrap'
+import CategoryButtons from '../../buttons/categoryButtons/CategoryButtons'
 
 const Cards = () => {
 
-    const { products, isLoading, getProducts } = useContext(ProductsProvider)
+    const { products, getProducts } = useContext(ProductsProvider)
 
     useEffect(() => {
         getProducts()
@@ -18,7 +19,8 @@ const Cards = () => {
     return (
         <Container>
             <h1 id='cards_title' className='text-center my-4'>Our products</h1>
-            <Row>
+            <CategoryButtons />
+            <Row >
                 {products && products.map((product) => {
                     return (
                         <Col key={product._id} xs={12} sm={6} md={4} lg={3}>
@@ -29,7 +31,7 @@ const Cards = () => {
                     )
                 })}
             </Row>
-        </Container>
+        </Container >
     )
 }
 

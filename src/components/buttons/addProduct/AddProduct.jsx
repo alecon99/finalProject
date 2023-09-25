@@ -1,49 +1,45 @@
 import { useState, useContext } from 'react';
+
 import { Button, Modal, Form, Spinner } from 'react-bootstrap';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faX } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 
 import { ProductsProvider } from '../../../context/ProductsContext';
 
 const AddProduct = () => {
 
-    const { getAllProducts } = useContext(ProductsProvider)
+    const { getAllProducts } = useContext(ProductsProvider);
 
     const [show, setShow] = useState(false);
-    const [productFormData, setProductFormData] = useState({})
-    const [buttonAvailable, setButtonAvailable] = useState("success")
-    const [buttonNotAvailable, setButtonNotAvailable] = useState("danger")
-    const [image, setImage] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
+    const [productFormData, setProductFormData] = useState({});
+    const [buttonAvailable, setButtonAvailable] = useState("success");
+    const [buttonNotAvailable, setButtonNotAvailable] = useState("danger");
+    const [image, setImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const closeModal = () => {
         setShow(false);
-        setButtonAvailable("success")
-        setButtonNotAvailable("danger")
+        setButtonAvailable("success");
+        setButtonNotAvailable("danger");
     }
-    const handleShow = () => setShow(true);
 
     const funcionButtonAvailable = () => {
         setProductFormData({
             ...productFormData,
             availability: true
-        })
-        setButtonAvailable("success")
-        setButtonNotAvailable("secondary")
+        });
+        setButtonAvailable("success");
+        setButtonNotAvailable("secondary");
     }
 
     const funcionButtonNotAvailable = () => {
         setProductFormData({
             ...productFormData,
             availability: false
-        })
-        setButtonNotAvailable("danger")
-        setButtonAvailable("secondary")
-    }
-
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0])
+        });
+        setButtonNotAvailable("danger");
+        setButtonAvailable("secondary");
     }
 
     const uploadImage = async (image) => {
@@ -92,7 +88,7 @@ const AddProduct = () => {
     }
     return (
         <>
-            <Button variant="secondary" onClick={handleShow}>
+            <Button variant="secondary" onClick={()=> setShow(true)}>
                 Add product
             </Button>
 
@@ -130,7 +126,7 @@ const AddProduct = () => {
 
                         <Form.Group className="mb-3" controlId="formBasicImage">
                             <Form.Label>Image</Form.Label>
-                            <Form.Control type="file" name='image' onChange={handleImageChange}
+                            <Form.Control type="file" name='image' onChange={(e)=>setImage(e.target.files[0])}
                             />
                         </Form.Group>
 

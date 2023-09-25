@@ -8,7 +8,6 @@ export const ShippingCostContext = ({ children }) => {
     const priorityShippingCost = 14.9;
     const freeShipping = 50;
 
-
     return(
         <ShippingCostProvider.Provider value={{ standardShippingCost, priorityShippingCost, freeShipping }}>
             {children}

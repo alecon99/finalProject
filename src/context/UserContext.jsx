@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useSession } from '../middlewares/ProtectedRoutes'
 
-
 export const UsersProvider = createContext();
 
 export const UsersContext = ({ children }) => {
@@ -10,9 +9,8 @@ export const UsersContext = ({ children }) => {
 
     const [ allUsers, setAllUsers ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
-    const [ userCounter, setUserCounter ] = useState("")
-
-    const [user, setUser] = useState({})
+    const [ userCounter, setUserCounter ] = useState("");
+    const [user, setUser] = useState({});
 
     useEffect(()=>{
         getAllUsers()
@@ -20,25 +18,25 @@ export const UsersContext = ({ children }) => {
 
     const getAllUsers = async ()=>{
         try {
-            setIsLoading(true)
-            const data = await fetch(`http://localhost:5050/users`)
-            const response = await data.json()
+            setIsLoading(true);
+            const data = await fetch(`http://localhost:5050/users`);
+            const response = await data.json();
             setUserCounter(response.counter);
-            setAllUsers(response.users)
-            setIsLoading(false)
+            setAllUsers(response.users);
+            setIsLoading(false);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
     const getUserById = async () => {
         try {
-            setIsLoading(true)
-            const data = await fetch(`http://localhost:5050/user/${session.id}`)
-            const response = await data.json()
-            setUser(response.userById)
+            setIsLoading(true);
+            const data = await fetch(`http://localhost:5050/user/${session.id}`);
+            const response = await data.json();
+            setUser(response.userById);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 

@@ -36,7 +36,7 @@ const CheckoutProducts = ({shippingCost}) => {
                                     <div className='bg-secondary text-white notification_badge'>{product.quantity}</div>
                                     <img className='round_image' src={product.product.img} alt={product.product.name} />
                                 </div>
-                                <div className='mx-3 ellipsis' >{product.product.name}</div>
+                                <div className='mx-3 ' >{product.product.name}</div>
                             </div>
                             <div>
                                 <div className='text-nowrap'>{product.product.price} €</div>

@@ -27,7 +27,7 @@ const AddUserAddress = ({ setShow }) => {
             setZipCode(user.shippingAddress.zipCode)
             setCountry(user.shippingAddress.country)
         }
-    }, [])
+    }, [user])
 
     const addAddress = async () => {
 

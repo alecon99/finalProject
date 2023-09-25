@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import '../loginForm/LoginForm.css'
+import '../../forms/Forms.css'
 
 import { Col, Container, Row, Button, Form } from 'react-bootstrap';
 

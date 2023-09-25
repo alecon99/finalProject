@@ -10,7 +10,7 @@ import { useSession } from '../../../middlewares/ProtectedRoutes'
 
 
 /* reactBootstrap */
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row, Spinner } from 'react-bootstrap'
 import AddToCartButton from '../../buttons/addToCartButton/AddToCartButton';
 
 const CardDetail = () => {
@@ -41,65 +41,72 @@ const CardDetail = () => {
   const { name, description, price, category, image, availability } = productDetail
 
   return (
-    <div className='padding_top_100 pb-5 font d-flex align-items-center'>
-      <Container>
-        <Row>
-          <Col md={6} xl={4} className='text-center text-md-end'>
-            <div id='card_container_image' className='border'>
-              <img id='card_image' src={image} alt="" />
-            </div>
-          </Col>
-          <Col md={6} xl={8} className='text-center text-md-start d-flex flex-column justify-content-between'>
-            <div>
-              <div className='fs-2'>{name}</div>
-              <div className='py-2'>| {category} |</div>
-              <div className='py-2 border-top text-secondary'>DESCRIPTION</div>
-              <div className=' '>{description}</div>
-            </div>
-            <div className='border-top pt-2'>
-              {availability ?
-                null
-                :
-                <div className='text-danger pb-2'>Product currently not available</div>
-              }
-              <div><FontAwesomeIcon icon={faPaperPlane} /> Free shipping from €50</div>
-              <div><FontAwesomeIcon icon={faRotate} /> Easy returns within 60 days</div>
-              <Row>
-                <Col lg={6}>
-                  <div className='fs-1'>
-                    € {price}
-                    <span className='fs-6 ms-2'>TAX incl.</span>
-                  </div>
-                </Col>
-                <Col lg={6} className='px-5 py-2 px-sm-0'>
-                  {availability && session ?
-                    <AddToCartButton
-                      productId={productId}
-                      productName={name}
-                      productPrice={price}
-                      productImg={image}
-                    />
-                    :
-                    null
-                  }
-                  {!availability || session ?
-                    null
-                    :
-                    <div className='d-flex justify-content-center fs-5'>
-                      <div>To add to cart</div>
-                      <div className='d-flex'>
-                        <Link className='green text-decoration-none text-black mx-1 fw-bold' to={'/login'} >Register</Link>
-                        <div className='mx-1'>or</div>
-                        <Link className='green text-decoration-none text-black fw-bold' to={'/login'} >Log in</Link>
-                      </div>
+    <div className='padding_top_100 pb-5 '>
+      {isLoading ?
+        <div className='text-center mt-5'>
+          <Spinner />
+          <div>loading...</div>
+        </div>
+        :
+        <Container>
+          <Row>
+            <Col md={6} xl={4} className='text-center text-md-end'>
+              <div id='card_container_image' className='border'>
+                <img id='card_image' src={image} alt="" />
+              </div>
+            </Col>
+            <Col md={6} xl={8} className='text-center text-md-start d-flex flex-column justify-content-between'>
+              <div>
+                <div className='fs-2'>{name}</div>
+                <div className='py-2'>| {category} |</div>
+                <div className='py-2 border-top text-secondary'>DESCRIPTION</div>
+                <div className=' '>{description}</div>
+              </div>
+              <div className='border-top pt-2'>
+                {availability ?
+                  null
+                  :
+                  <div className='text-danger pb-2'>Product currently not available</div>
+                }
+                <div><FontAwesomeIcon icon={faPaperPlane} /> Free shipping from €50</div>
+                <div><FontAwesomeIcon icon={faRotate} /> Easy returns within 60 days</div>
+                <Row>
+                  <Col lg={6}>
+                    <div className='fs-1'>
+                      € {price}
+                      <span className='fs-6 ms-2'>TAX incl.</span>
                     </div>
-                  }
-                </Col>
-              </Row>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+                  </Col>
+                  <Col lg={6} className='px-5 py-2 px-sm-0'>
+                    {availability && session ?
+                      <AddToCartButton
+                        productId={productId}
+                        productName={name}
+                        productPrice={price}
+                        productImg={image}
+                      />
+                      :
+                      null
+                    }
+                    {!availability || session ?
+                      null
+                      :
+                      <div className='d-flex justify-content-center fs-5'>
+                        <div>To add to cart</div>
+                        <div className='d-flex'>
+                          <Link className='green text-decoration-none text-black mx-1 fw-bold' to={'/login'} >Register</Link>
+                          <div className='mx-1'>or</div>
+                          <Link className='green text-decoration-none text-black fw-bold' to={'/login'} >Log in</Link>
+                        </div>
+                      </div>
+                    }
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      }
     </div>
   )
 }

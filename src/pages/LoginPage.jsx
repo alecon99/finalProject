@@ -1,9 +1,10 @@
 import React from 'react'
-import LoginForms from '../components/loginForm/LoginForm'
+
+import LoginForms from '../components/forms/loginForm/LoginForm'
 import SimplifiedNavigatioBar from '../components/navigationBar/SimplifiedNavigatioBar'
 import Homebutton from '../components/buttons/homeButton/Homebutton'
 
-const Loginpage = () => {
+const LoginPage = () => {
   return (
     <>
       <SimplifiedNavigatioBar/>
@@ -13,4 +14,4 @@ const Loginpage = () => {
   )
 }
 
-export default Loginpage
+export default LoginPage

@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { ProductsContext } from './context/ProductsContext';
@@ -84,7 +83,7 @@ function App() {
                           />
                           <Route
                             path='/manageOrders'
-                            element={<ManageOrdersPage/>}
+                            element={<ManageOrdersPage />}
                           />
                           <Route
                             path='/manageUsers'

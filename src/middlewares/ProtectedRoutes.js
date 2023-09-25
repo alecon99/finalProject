@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Outlet } from "react-router-dom";
+
 import jwtDecode from "jwt-decode"
 import LoginPage from "../pages/LoginPage";
-import { Outlet, useNavigate } from "react-router-dom";
 
 const auth = ()=>{
     return JSON.parse(localStorage.getItem("userLoggedIn"));
@@ -11,15 +12,7 @@ export const useSession = ()=>{
     const session = auth();
     const decodedSession = session? jwtDecode(session): null;
 
-    /* const navigate = useNavigate(); */
-
-/*     useEffect(()=>{
-        if(!session){
-            navigate('/', { replace: true });
-        }
-    },[navigate, session]); */
-
-    return decodedSession
+    return decodedSession;
 };
 
 const ProtectedRoutes = ()=>{

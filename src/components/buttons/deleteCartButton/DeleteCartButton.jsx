@@ -10,6 +10,8 @@ const DeleteCartButton = ({ cartId }) => {
 
     const { productsCartSum, getCartProducts } = useContext(CartProvider)
 
+    
+
     const deleteCartProduct = async () => {
         try {
             const response = await fetch(`http://localhost:5050/cart/deleteProduct/${cartId}/${session.id}`, {

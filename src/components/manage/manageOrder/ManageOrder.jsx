@@ -54,7 +54,6 @@ const ManageOrder = () => {
         getAllOrders()
     }, [])
 
-    console.log(orderState);
     return (
         <Container className='padding_top_100 pb-5' >
             {isLoading ?
