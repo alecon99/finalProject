@@ -1,9 +1,8 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react';
 
-import { useSession } from '../../../../middlewares/ProtectedRoutes'
+import { useSession } from '../../../../middlewares/ProtectedRoutes';
 
 import { Button, Form } from 'react-bootstrap';
-
 
 import { UsersProvider } from '../../../../context/UserContext';
 
@@ -11,21 +10,21 @@ const AddUserAddress = ({ setShow }) => {
 
     const session = useSession();
 
-    const { getUserById, user } = useContext(UsersProvider)
+    const { getUserById, user } = useContext(UsersProvider);
 
-    const [address, setAddress] = useState(null)
-    const [city, setCity] = useState(null)
-    const [state, setState] = useState(null)
-    const [zipCode, setZipCode] = useState(null)
-    const [country, setCountry] = useState(null)
+    const [address, setAddress] = useState(null);
+    const [city, setCity] = useState(null);
+    const [state, setState] = useState(null);
+    const [zipCode, setZipCode] = useState(null);
+    const [country, setCountry] = useState(null);
 
     useEffect(() => {
         if (user.shippingAddress) {
-            setAddress(user.shippingAddress.address)
-            setCity(user.shippingAddress.city)
-            setState(user.shippingAddress.state)
-            setZipCode(user.shippingAddress.zipCode)
-            setCountry(user.shippingAddress.country)
+            setAddress(user.shippingAddress.address);
+            setCity(user.shippingAddress.city);
+            setState(user.shippingAddress.state);
+            setZipCode(user.shippingAddress.zipCode);
+            setCountry(user.shippingAddress.country);
         }
     }, [user])
 
@@ -42,17 +41,15 @@ const AddUserAddress = ({ setShow }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/user/newAddress/${session.id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/newAddress/${session.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-
-            getUserById()
-            setShow(false)
-
+            getUserById();
+            setShow(false);
         } catch (error) {
             console.error(error);
         }

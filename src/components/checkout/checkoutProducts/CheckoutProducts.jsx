@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { Col } from 'react-bootstrap'
+
 import { CartProvider } from '../../../context/CartContext'
 import { ShippingCostProvider } from '../../../context/ShippingCost'
 
@@ -8,25 +9,24 @@ import { faBoxOpen, faRotate } from '@fortawesome/free-solid-svg-icons'
 
 import '../Checkout.css'
 
+const CheckoutProducts = ({ shippingCost }) => {
 
-const CheckoutProducts = ({shippingCost}) => {
-
-    const { totalPrice, cartCounter, cartProducts, getCartProducts } = useContext(CartProvider)
-    const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider)
+    const { totalPrice, cartCounter, cartProducts, getCartProducts } = useContext(CartProvider);
+    const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider);
 
     let Total = Math.round(((totalPrice + shippingCost) + Number.EPSILON) * 100) / 100;
 
     useEffect(() => {
-        getCartProducts()
+        getCartProducts();
     }, [totalPrice])
 
     return (
         <Col md={6} className='border-end bg-light padding_top_100 px-5'>
             {cartCounter > 1 ?
-                    <h2>Products</h2>
-                    :
-                    <h2>Product</h2>
-                }
+                <h2>Products</h2>
+                :
+                <h2>Product</h2>
+            }
             <div>
                 {cartProducts && cartProducts.map((product) => {
                     return (
@@ -80,7 +80,7 @@ const CheckoutProducts = ({shippingCost}) => {
                 </div>
             </div>
             <div className='bg-white border rounded mx-md-5 my-4 p-3 text-center d-flex'>
-                <div className='packages-info p-1'>
+                <div className='packages_info p-1'>
                     <FontAwesomeIcon icon={faRotate} className='fs-1 mb-2' />
                     <div className='fw-bold'>Free return</div>
                     <div className='text-secondary font_size_xs'>Don't like the product? Make a return easily and free of charge.</div>

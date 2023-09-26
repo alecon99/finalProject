@@ -1,13 +1,15 @@
-import { useEffect, useContext } from 'react'
-import { CartProvider } from '../../../context/CartContext'
-import DeleteCartButton from '../../buttons/deleteCartButton/DeleteCartButton'
+import { useEffect, useContext } from 'react';
+
+import { CartProvider } from '../../../context/CartContext';
+
+import DeleteCartButton from '../../buttons/deleteCartButton/DeleteCartButton';
 
 const ProductCartCard = () => {
 
-    const { setShow, cartProducts, getCartProducts } = useContext(CartProvider)
+    const { setShow, cartProducts, getCartProducts } = useContext(CartProvider);
 
     useEffect(() => {
-        getCartProducts()
+        getCartProducts();
     }, [])
 
     return (
@@ -15,7 +17,7 @@ const ProductCartCard = () => {
             {cartProducts && cartProducts.map((product) => {
 
                 const detail = () => {
-                    setShow(false)
+                    setShow(false);
                     window.open(`/detail/${product.product.id}`, "_blank", "noreferrer");
                 }
 

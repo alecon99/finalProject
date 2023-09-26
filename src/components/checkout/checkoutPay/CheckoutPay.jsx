@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
+
 import { UsersProvider } from '../../../context/UserContext'
 import { CartProvider } from '../../../context/CartContext'
 import { ShippingCostProvider } from '../../../context/ShippingCost'
@@ -13,31 +14,31 @@ import { useSession } from '../../../middlewares/ProtectedRoutes'
 
 const CheckoutPay = ({ checkoutPage, setCheckoutPage, shippingCost }) => {
 
-    const { user } = useContext(UsersProvider)
-    const { cartProducts, totalPrice } = useContext(CartProvider)
-    const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider)
+    const { user } = useContext(UsersProvider);
+    const { cartProducts, totalPrice } = useContext(CartProvider);
+    const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider);
 
-    const [ totalPaid , setTotalPaid ] = useState(null)
+    const [totalPaid, setTotalPaid] = useState(null);
 
-    const navigate = useNavigate()
-    const session = useSession()
+    const navigate = useNavigate();
+    const session = useSession();
 
     let Total = Math.round(((totalPrice + shippingCost) + Number.EPSILON) * 100) / 100;
 
-    const totalCalculation = ()=>{
-        if(totalPrice > freeShipping && shippingCost === standardShippingCost){
-            setTotalPaid(totalPrice)
+    const totalCalculation = () => {
+        if (totalPrice > freeShipping && shippingCost === standardShippingCost) {
+            setTotalPaid(totalPrice);
         } else {
-            setTotalPaid(Total)
+            setTotalPaid(Total);
         }
     }
 
     useEffect(() => {
-        totalCalculation()
-    }, [totalPrice,shippingCost])
+        totalCalculation();
+    }, [totalPrice, shippingCost])
 
     const returnToShipping = () => {
-        setCheckoutPage("shipping")
+        setCheckoutPage("shipping");
     }
 
     const pay = async () => {
@@ -54,23 +55,44 @@ const CheckoutPay = ({ checkoutPage, setCheckoutPage, shippingCost }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/newOrder/${user._id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/newOrder/${user._id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-            deleteAllCart()
-            navigate('/orderCompleted')
+            deleteAllCart();
+            sendEmail();
+            navigate('/orderCompleted');
         } catch (error) {
             console.error("Failed to save the post");
         }
     }
 
+    const sendEmail = async () => {
+
+        const payload = {
+            subject: "New order",
+            text: `Thank you ${user.name} ${user.surname} from the NewLife team for purchasing our products`,
+        }
+        try {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/sendEmail`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+        } catch (error) {
+            console.error("Failed to send email");
+        }
+
+    }
+
     const deleteAllCart = async () => {
-        try {   
-            const response = await fetch(`http://localhost:5050/cart/deleteAllProduct/${session.id}`, {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/cart/deleteAllProduct/${session.id}`, {
                 method: "PUT"
             });
         } catch (error) {
@@ -133,8 +155,8 @@ const CheckoutPay = ({ checkoutPage, setCheckoutPage, shippingCost }) => {
                 <h3>Payment</h3>
                 <div className='fs-3 mb-2'>
                     <FontAwesomeIcon icon={faCcVisa} className='me-2' />
-                    <FontAwesomeIcon icon={faCcMastercard} className='me-2 text-warning'/>
-                    <FontAwesomeIcon icon={faCcAmex} className='text-primary'/>
+                    <FontAwesomeIcon icon={faCcMastercard} className='me-2 text-warning' />
+                    <FontAwesomeIcon icon={faCcAmex} className='text-primary' />
                 </div>
                 <Form>
                     <Row>
@@ -170,14 +192,12 @@ const CheckoutPay = ({ checkoutPage, setCheckoutPage, shippingCost }) => {
                         <Col sm={6}>
                             <Form.Group className="mb-3" controlId="formBasicCardExpYear">
                                 <div>Exp year</div>
-                                <Form.Control type="number" placeholder='yyyy' max={2030} min={2023}
+                                <Form.Control type="number" placeholder='yyyy' min={2023} max={2030}
                                 />
                             </Form.Group>
-
                         </Col>
                     </Row>
                 </Form>
-
             </div>
             <div className='d-flex justify-content-between align-items-center mt-4'>
                 <div onClick={returnToShipping} className='hover_link d-flex align-items-center'>

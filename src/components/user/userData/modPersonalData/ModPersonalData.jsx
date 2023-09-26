@@ -1,23 +1,26 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react';
+
 import { Button, Col, Form, Row } from 'react-bootstrap';
+
 import { UsersProvider } from '../../../../context/UserContext';
+
 import { useSession } from '../../../../middlewares/ProtectedRoutes';
 
 const ModPersonalData = ({ setShow }) => {
 
-    const { getUserById, user } = useContext(UsersProvider)
+    const { getUserById, user } = useContext(UsersProvider);
 
-    const session = useSession()
+    const session = useSession();
 
-    const [phoneNumber, setPhoneNumber] = useState({})
-    const [personalData, setPersonalData] = useState({})
+    const [phoneNumber, setPhoneNumber] = useState({});
+    const [personalData, setPersonalData] = useState({});
 
     useEffect(() => {
         if (user.phone) {
             setPhoneNumber({
                 prefix: user.phone.prefix,
                 number: user.phone.number
-            })
+            });
         }
     }, [])
 
@@ -34,17 +37,15 @@ const ModPersonalData = ({ setShow }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/user/modPersonalData/${session.id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/modPersonalData/${session.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-
-            getUserById()
-            setShow(false)
-
+            getUserById();
+            setShow(false);
         } catch (error) {
             console.error(error);
         }

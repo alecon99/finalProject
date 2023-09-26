@@ -1,28 +1,32 @@
-import { useContext, useState } from 'react'
-import { useSession } from '../../../middlewares/ProtectedRoutes'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { useContext, useState } from 'react';
 
-import { CartProvider } from '../../../context/CartContext'
+import { useSession } from '../../../middlewares/ProtectedRoutes';
 
-import '../addToCartButton/AddToCartButton.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+
+import { CartProvider } from '../../../context/CartContext';
+
+import '../addToCartButton/AddToCartButton.css';
 
 const AddToCartButton = ({ productId, productName, productPrice, productImg }) => {
 
-    const { setShow, getCartProducts } = useContext(CartProvider)
+    const { setShow, getCartProducts } = useContext(CartProvider);
 
-    const [productQuantity, setProductQuantity] = useState(1)
+    const [productQuantity, setProductQuantity] = useState(1);
 
     const session = useSession();
 
     const increaseProductQuantity = () => {
-        if (productQuantity < 20)
-            setProductQuantity(productQuantity + 1)
+        if (productQuantity < 20) {
+            setProductQuantity(productQuantity + 1);
+        }
     }
 
     const decreaseProductQuantity = () => {
-        if (productQuantity > 1)
-            setProductQuantity(productQuantity - 1)
+        if (productQuantity > 1) {
+            setProductQuantity(productQuantity - 1);
+        }
     }
 
     const addToCart = async () => {
@@ -39,16 +43,16 @@ const AddToCartButton = ({ productId, productName, productPrice, productImg }) =
 
         try {
 
-            const response = await fetch(`http://localhost:5050/newCart/` + session.id, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/newCart/` + session.id, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newProductCart),
             });
-            getCartProducts()
-            setShow(true)
-            setProductQuantity(1)
+            getCartProducts();
+            setShow(true);
+            setProductQuantity(1);
             return response.json();
         } catch (error) {
             console.error("Failed to save the product");
@@ -57,7 +61,6 @@ const AddToCartButton = ({ productId, productName, productPrice, productImg }) =
 
     return (
         <div className='d-flex justify-content-center align-items-center bg-dark rounded-3 text-white p-2 fs-5'>
-            {/*         <div className={`me-4 bg-black text-white p-2 rounded-3 ${show ? null : 'd-none'}`}>added to cart</div> */}
             <div className='d-flex align-items-center me-4'>
                 <div onClick={increaseProductQuantity} className='hover_link'><FontAwesomeIcon icon={faPlus} /></div>
                 <div id='product_quantity' className='mx-2 text-center'>{productQuantity}</div>

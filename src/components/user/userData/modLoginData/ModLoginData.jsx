@@ -1,18 +1,21 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
+
 import { Button, Form } from 'react-bootstrap';
+
 import { useSession } from '../../../../middlewares/ProtectedRoutes';
+
 import { UsersProvider } from '../../../../context/UserContext';
 
 const ModLoginData = ({ setShow }) => {
 
     const session = useSession();
 
-    const { getUserById, user } = useContext(UsersProvider)
+    const { getUserById, user } = useContext(UsersProvider);
 
-    const [ passwordData, setPasswordData] = useState({})
-    const [ emailData, setEmailData ] = useState()
-    const [ passError, setPassError] = useState(false)
-    const [ emailError, setEmailError] = useState(false)
+    const [passwordData, setPasswordData] = useState({});
+    const [emailData, setEmailData] = useState();
+    const [passError, setPassError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
 
     const modEmail = async () => {
 
@@ -21,20 +24,18 @@ const ModLoginData = ({ setShow }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/user/modEmail/${session.id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/modEmail/${session.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-
-            getUserById()
-            setShow(false)
-
+            getUserById();
+            setShow(false);
         } catch (error) {
             console.error(error);
-            setEmailError(true)
+            setEmailError(true);
         }
     }
 
@@ -46,17 +47,15 @@ const ModLoginData = ({ setShow }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/user/modPassword/${session.id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/modPassword/${session.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-
-            getUserById()
-            setShow(false)
-
+            getUserById();
+            setShow(false);
         } catch (error) {
             console.error(error);
             setPassError(true)
@@ -68,7 +67,7 @@ const ModLoginData = ({ setShow }) => {
             <div className='text-center fs-4'>Edit</div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <div>Email</div>
-                <Form.Control placeholder={user.email} type="text" onChange={(e)=> setEmailData(e.target.value)}/>
+                <Form.Control placeholder={user.email} type="text" onChange={(e) => setEmailData(e.target.value)} />
             </Form.Group>
             <div className='mt-3 d-flex align-items-center'>
                 <Button variant="success" onClick={modEmail}>

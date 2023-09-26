@@ -1,23 +1,26 @@
 import { useContext, useState } from 'react'
+
 import { ProductsProvider } from '../../../context/ProductsContext'
+
 import { Button } from 'react-bootstrap'
 
 const CategoryButtons = () => {
 
-    const { setProducts, getProducts } = useContext(ProductsProvider)
-    const [ reset, setReset ] = useState(false)
+    const { setProducts, getProducts } = useContext(ProductsProvider);
 
-    const resetFilters = ()=>{
-        setReset(false)
-        getProducts()
+    const [reset, setReset] = useState(false);
+
+    const resetFilters = () => {
+        setReset(false);
+        getProducts();
     }
 
     const getFilterProducts = async (filter) => {
         try {
-            const data = await fetch(`http://localhost:5050/filterProducts/${filter}`);
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/filterProducts/${filter}`);
             const response = await data.json();
-            setProducts(response.products)
-            setReset(true)
+            setProducts(response.products);
+            setReset(true);
         } catch (error) {
             console.log(error);
         }

@@ -1,35 +1,29 @@
-import React, { useState, useContext } from 'react'
+import { useState, useContext } from 'react';
 
-/* css */
-import '../navigationBar/NavigationBar.css'
+import '../navigationBar/NavigationBar.css';
 
-/* reactBootstrap */
-import { Container } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-import { useSession } from '../../middlewares/ProtectedRoutes'
+import { useSession } from '../../middlewares/ProtectedRoutes';
 
-/* fontAwersome */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
-/* components */
-import UserMenu from './userMenu/UserMenu'
+import UserMenu from './userMenu/UserMenu';
 
-
-/* context */
-import { AdminProvider } from '../../context/AdminContext'
+import { AdminProvider } from '../../context/AdminContext';
 
 const NavigationBar = () => {
 
-  const { adminRole } = useContext(AdminProvider)
+  const { adminRole } = useContext(AdminProvider);
 
   const session = useSession();
 
-  const [userMenuShow, setUserMenuShow] = useState(false)
+  const [userMenuShow, setUserMenuShow] = useState(false);
 
   const togleUserMenuShow = () => {
-    setUserMenuShow(!userMenuShow)
+    setUserMenuShow(!userMenuShow);
   }
 
   return (
@@ -38,8 +32,6 @@ const NavigationBar = () => {
       className={`fixed-top py-2 ${adminRole ? 'bg-admin' : 'bg-black'}`}
     >
       <Container className='text-white d-flex justify-content-between align-items-center'>
-
-        {/* user */}
         {session ?
           <div>
             {adminRole ? <div className='text-dark fw-bold'>Admin</div> : <div className='green'>Welcome</div>}
@@ -59,13 +51,9 @@ const NavigationBar = () => {
             </div>
           </div>
         }
-
-        {/* logo */}
         <Link to={'/'} className='text-end nav_items font fs-1 text-decoration-none text-white'>NewLife</Link>
-        
       </Container>
 
-      {/* pop-up menu */}
       {userMenuShow ? <UserMenu setUserMenuShow={setUserMenuShow} /> : null}
     </div>
   )

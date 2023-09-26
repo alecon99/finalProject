@@ -1,32 +1,32 @@
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext, useState } from 'react';
 
-import { Container, Modal } from 'react-bootstrap'
+import { Container, Modal } from 'react-bootstrap';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { UsersProvider } from '../../../context/UserContext'
+import { UsersProvider } from '../../../context/UserContext';
 
-import AddUserAddress from './addUserAddress/AddUserAddress'
-import ModLoginData from './modLoginData/ModLoginData'
-import ModPersonalData from './modPersonalData/ModPersonalData'
+import AddUserAddress from './addUserAddress/AddUserAddress';
+import ModLoginData from './modLoginData/ModLoginData';
+import ModPersonalData from './modPersonalData/ModPersonalData';
 
 const UserData = () => {
 
-    const { getUserById, user } = useContext(UsersProvider)
+    const { getUserById, user } = useContext(UsersProvider);
 
-    const [showAddressModal, setShowAddressModal] = useState(false)
-    const [showLoginModal, setShowLoginModal] = useState(false)
-    const [showPersonalModal, setShowPersonalModal] = useState(false)
+    const [showAddressModal, setShowAddressModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showPersonalModal, setShowPersonalModal] = useState(false);
 
     const handleClose = () => {
         setShowAddressModal(false);
-        setShowLoginModal(false)
-        setShowPersonalModal(false)
+        setShowLoginModal(false);
+        setShowPersonalModal(false);
     }
 
     useEffect(() => {
-        getUserById()
+        getUserById();
     }, [])
 
     return (
@@ -41,13 +41,13 @@ const UserData = () => {
                         keyboard={false}
                     >
                         <Modal.Header closeButton>
-                        <Modal.Title className='mb-2'>Personal data</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <ModPersonalData setShow={setShowPersonalModal}/>
-                    </Modal.Body>
+                            <Modal.Title className='mb-2'>Personal data</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <ModPersonalData setShow={setShowPersonalModal} />
+                        </Modal.Body>
                     </Modal>
-                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={()=> setShowPersonalModal(true)} />
+                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={() => setShowPersonalModal(true)} />
                 </div>
                 <div>
                     <div>Name: {user.name}</div>
@@ -74,13 +74,13 @@ const UserData = () => {
                         keyboard={false}
                     >
                         <Modal.Header closeButton>
-                        <Modal.Title className='mb-2'>Login user</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <ModLoginData setShow={setShowLoginModal}/>
-                    </Modal.Body>
+                            <Modal.Title className='mb-2'>Login user</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <ModLoginData setShow={setShowLoginModal} />
+                        </Modal.Body>
                     </Modal>
-                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={()=>setShowLoginModal(true)}/>
+                    <FontAwesomeIcon className='ms-4 fs-5 hover_link' icon={faPencil} onClick={() => setShowLoginModal(true)} />
                 </div>
                 <div>
                     <div>Email: {user.email}</div>
@@ -97,18 +97,18 @@ const UserData = () => {
                         keyboard={false}
                     >
                         <Modal.Header closeButton>
-                        <Modal.Title className='mb-2'>Shipping address</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <AddUserAddress setShow={setShowAddressModal}/>
-                    </Modal.Body>
+                            <Modal.Title className='mb-2'>Shipping address</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <AddUserAddress setShow={setShowAddressModal} />
+                        </Modal.Body>
                     </Modal>
                     {user.shippingAddress ?
-                        <div onClick={()=>setShowAddressModal(true)} className='m-3 hover_link'>
+                        <div onClick={() => setShowAddressModal(true)} className='m-3 hover_link'>
                             <FontAwesomeIcon className='fs-5' icon={faPencil} />
                         </div>
                         :
-                        <div onClick={()=>setShowAddressModal(true)} className='m-3 hover_link'>
+                        <div onClick={() => setShowAddressModal(true)} className='m-3 hover_link'>
                             <FontAwesomeIcon className='fs-5' icon={faPlus} />
                         </div>
                     }
@@ -117,15 +117,14 @@ const UserData = () => {
                     <div>
                         <div>Address: {user.shippingAddress.address}</div>
                         <div>City: {user.shippingAddress.city}</div>
-                        <div>Country: {user.shippingAddress.country}</div>
+                        <div>Country / Province: {user.shippingAddress.country}</div>
                         <div>State: {user.shippingAddress.state}</div>
-                        <div>Zip code: {user.shippingAddress.zipCode}</div>
+                        <div>ZipCode / PostalCode: {user.shippingAddress.zipCode}</div>
                     </div>
                     :
                     null
                 }
             </div>
-
         </Container>
     )
 }

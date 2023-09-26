@@ -1,19 +1,18 @@
-import React, { useContext, useEffect } from 'react'
-import { ProductsProvider } from '../../../context/ProductsContext'
-import SingleCard from '../singleCard/SingleCard'
+import { useContext, useEffect } from 'react';
 
-import '../cards/Cards.css'
+import { ProductsProvider } from '../../../context/ProductsContext';
 
-/* reactBootstrap */
-import { Col, Container, Row } from 'react-bootstrap'
-import CategoryButtons from '../../buttons/categoryButtons/CategoryButtons'
+import SingleCard from '../singleCard/SingleCard';
+import CategoryButtons from '../../buttons/categoryButtons/CategoryButtons';
+
+import { Col, Container, Row } from 'react-bootstrap';
 
 const Cards = () => {
 
-    const { products, getProducts } = useContext(ProductsProvider)
+    const { products, getProducts } = useContext(ProductsProvider);
 
     useEffect(() => {
-        getProducts()
+        getProducts();
     }, [])
 
     return (

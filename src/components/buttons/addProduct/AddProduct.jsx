@@ -47,7 +47,7 @@ const AddProduct = () => {
         fileData.append("image", image);
 
         try {
-            const response = await fetch(`http://localhost:5050/image/cloudUploadImg`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/image/cloudUploadImg`, {
                 method: "POST",
                 body: fileData,
             });
@@ -69,7 +69,7 @@ const AddProduct = () => {
                     image: uploadedImage.image,
                 }
 
-                const response = await fetch(`http://localhost:5050/newProduct`, {
+                const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/newProduct`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const AddProduct = () => {
     }
     return (
         <>
-            <Button variant="secondary" onClick={()=> setShow(true)}>
+            <Button variant="secondary" onClick={() => setShow(true)}>
                 Add product
             </Button>
 
@@ -116,7 +116,7 @@ const AddProduct = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicDescription">
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label>Description (min: 5 characters)</Form.Label>
                             <textarea type="text" rows={5} cols={55} className='d-flex border rounded' onChange={(e) => setProductFormData({
                                 ...productFormData,
                                 description: e.target.value
@@ -126,7 +126,7 @@ const AddProduct = () => {
 
                         <Form.Group className="mb-3" controlId="formBasicImage">
                             <Form.Label>Image</Form.Label>
-                            <Form.Control type="file" name='image' onChange={(e)=>setImage(e.target.files[0])}
+                            <Form.Control type="file" name='image' onChange={(e) => setImage(e.target.files[0])}
                             />
                         </Form.Group>
 
@@ -163,7 +163,7 @@ const AddProduct = () => {
                         <div className='mt-3 d-flex justify-content-between'>
                             <Button variant="success" type="submit" className='d-flex align-items-center'>
                                 {isLoading ?
-                                    <Spinner/>
+                                    <Spinner />
                                     :
                                     <div>Save</div>
                                 }

@@ -1,42 +1,38 @@
-import React, { useState } from 'react'
-import axios from "axios";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../forms/Forms.css'
 
 import { Col, Container, Row, Button, Form } from 'react-bootstrap';
 
+import axios from "axios";
+
+import '../../forms/Forms.css';
 
 const LoginForms = () => {
 
-    const navigate = useNavigate()
-    const [loginFormData, setLoginFormData] = useState({})
-    const [alertMessage, setAlertMessage] = useState(false)
+    const navigate = useNavigate();
+    const [loginFormData, setLoginFormData] = useState({});
+    const [alertMessage, setAlertMessage] = useState(false);
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         try {
             setAlertMessage(false)
-            await axios.post(`http://localhost:5050/login`, loginFormData)
+            await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/login`, loginFormData)
                 .then((res) => {
                     localStorage.setItem("userLoggedIn", JSON.stringify(res.data.token))
                 })
                 .then(() => navigate("/successLogin"))
 
         } catch (error) {
-            console.log("password o email non valida")
-            setAlertMessage(true)
+            console.log("Invalid email or password");
+            setAlertMessage(true);
         }
     }
 
-    const handleLoginGoogle = () => {
-        window.location.href = `http://localhost:5050/auth/google`
-    }
-
     return (
-
         <div id='container_login_form'>
-            <Container id='registration_form'> 
+            <Container id='registration_form'>
                 <Row className='d-flex align-items-center'>
                     <Col sm={6} >
                         <h1 className='text-center text-sm-end  me-sm-4'>Insert your credentials</h1>

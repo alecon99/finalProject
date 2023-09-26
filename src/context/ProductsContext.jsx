@@ -20,7 +20,7 @@ export const ProductsContext = ({ children }) => {
     const getProducts = async ()=>{
         try {
             setIsLoading(true);
-            const data = await fetch(`http://localhost:5050/products?pageSize=${pageSize}`);
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/products?pageSize=${pageSize}`);
             const response = await data.json();
             setPartialProductsCounter(response.counter);
             setProducts(response.products);
@@ -33,7 +33,7 @@ export const ProductsContext = ({ children }) => {
     const getAllProducts = async ()=>{
         try {
             setIsLoading(true);
-            const data = await fetch(`http://localhost:5050/allProducts`);
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/allProducts`);
             const response = await data.json();
             setProductsCounter(response.counter);
             setAllProducts(response.products);

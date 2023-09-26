@@ -1,20 +1,19 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react';
 
-import { Container, Spinner, Button } from 'react-bootstrap'
+import { Container, Spinner, Button } from 'react-bootstrap';
 
-import { UsersProvider } from '../../../context/UserContext'
+import { UsersProvider } from '../../../context/UserContext';
 
-import DeleteUserButton from '../../buttons/deleteUser/DeleteUserButton'
-import { useSession } from '../../../middlewares/ProtectedRoutes'
+import DeleteUserButton from '../../buttons/deleteUser/DeleteUserButton';
 
 const ManageUser = () => {
 
-    const { allUsers, userCounter, isLoading, getAllUsers } = useContext(UsersProvider)
+    const { allUsers, userCounter, isLoading, getAllUsers } = useContext(UsersProvider);
 
-    const [showDeleteUser, setShowDeleteuser] = useState(null)
+    const [showDeleteUser, setShowDeleteuser] = useState(null);
 
     useEffect(() => {
-        getAllUsers()
+        getAllUsers();
     }, [])
 
     return (

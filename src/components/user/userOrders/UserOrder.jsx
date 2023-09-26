@@ -1,36 +1,36 @@
-import { useEffect, useState, useContext } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
-import { useSession } from '../../../middlewares/ProtectedRoutes'
-import { ShippingCostProvider } from '../../../context/ShippingCost'
+import { useEffect, useState, useContext } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBoxOpen, faBagShopping, faCircleCheck, faGears, faTruck, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { Button, Container } from 'react-bootstrap';
+
+import { useSession } from '../../../middlewares/ProtectedRoutes';
+
+import { ShippingCostProvider } from '../../../context/ShippingCost';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxOpen, faBagShopping, faCircleCheck, faGears, faTruck, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const UserOrder = () => {
 
-    const { standardShippingCost } = useContext(ShippingCostProvider)
+    const { standardShippingCost } = useContext(ShippingCostProvider);
 
-    const [orders, setOrders] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [showCart, setShowCart] = useState(null)
-    const [showCancelOrder, setShowCancelOrder] = useState(null)
-    const [showReturn, setShowReturn] = useState(null)
+    const [orders, setOrders] = useState([]);
+    const [showCart, setShowCart] = useState(null);
+    const [showCancelOrder, setShowCancelOrder] = useState(null);
+    const [showReturn, setShowReturn] = useState(null);
 
     const session = useSession();
 
     useEffect(() => {
-        getOrder()
+        getOrder();
     }, [])
 
     const getOrder = async () => {
         try {
-            setIsLoading(true)
-            const data = await fetch(`http://localhost:5050/user/order/${session.id}`)
-            const response = await data.json()
-            setOrders(response.order)
-            setIsLoading(false)
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/order/${session.id}`);
+            const response = await data.json();
+            setOrders(response.order);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -41,15 +41,15 @@ const UserOrder = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/modOrder/${order}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/modOrder/${order}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-            getOrder()
-            setShowCancelOrder(null)
+            getOrder();
+            setShowCancelOrder(null);
         } catch (error) {
             console.error("Failed to save the post");
         }
@@ -194,7 +194,7 @@ const UserOrder = () => {
                                 :
                                 null
                             }
-                            {order.state !== 'completed' && order.state !== 'processing'  ?
+                            {order.state !== 'completed' && order.state !== 'processing' ?
                                 <div className='py-2 fw-bold'>#{order._id}</div>
                                 :
                                 null

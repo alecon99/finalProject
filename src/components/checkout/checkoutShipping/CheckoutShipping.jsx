@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+
 import { UsersProvider } from '../../../context/UserContext'
 import { ShippingCostProvider } from '../../../context/ShippingCost'
 
@@ -9,24 +10,24 @@ import { CartProvider } from '../../../context/CartContext'
 
 const CheckoutShipping = ({ checkoutPage, shippingCost, setShippingCost, setCheckoutPage }) => {
 
-    const { user } = useContext(UsersProvider)
-    const { totalPrice } = useContext(CartProvider)
-    const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider)
+    const { user } = useContext(UsersProvider);
+    const { totalPrice } = useContext(CartProvider);
+    const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider);
 
-    const itIsFree = ()=>{
-        if(totalPrice < freeShipping){
-            setShippingCost(9.9)
-        }else{
-            setShippingCost(0)
+    const itIsFree = () => {
+        if (totalPrice < freeShipping) {
+            setShippingCost(standardShippingCost);
+        } else {
+            setShippingCost(0);
         }
     }
 
     const returnToInfo = () => {
-        setCheckoutPage("info")
+        setCheckoutPage("info");
     }
 
     const goToPay = () => {
-        setCheckoutPage("pay")
+        setCheckoutPage("pay");
     }
 
     return (
@@ -53,9 +54,10 @@ const CheckoutShipping = ({ checkoutPage, shippingCost, setShippingCost, setChec
                 {user.shippingAddress ?
                     <div className='d-flex'>
                         <div className='ellipsis'>{user.shippingAddress.address},</div>
-                        <div className='mx-1'>{user.shippingAddress.zipCode},</div>
+                        <div className='mx-1 ellipsis'>{user.shippingAddress.city},</div>
+                        <div className='mx-1 d-none d-sm-block'>{user.shippingAddress.zipCode},</div>
                         <div>{user.shippingAddress.country},</div>
-                        <div className='mx-1'>{user.shippingAddress.state}</div>
+                        <div className='mx-1 d-none d-sm-block'>{user.shippingAddress.state}</div>
                     </div>
                     :
                     null
@@ -65,10 +67,10 @@ const CheckoutShipping = ({ checkoutPage, shippingCost, setShippingCost, setChec
                 <h3>Shipping methods</h3>
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex align-items-center' onClick={() => itIsFree()}>
-                        {shippingCost === standardShippingCost || shippingCost === 0?
-                            <FontAwesomeIcon icon={faCircleDot}/>
+                        {shippingCost === standardShippingCost || shippingCost === 0 ?
+                            <FontAwesomeIcon icon={faCircleDot} />
                             :
-                            <FontAwesomeIcon icon={faCircle} className='hover_link'/>
+                            <FontAwesomeIcon icon={faCircle} className='hover_link' />
                         }
                         <div className='ms-2'>Standard (4-5 working days)</div>
                     </div>
@@ -81,9 +83,9 @@ const CheckoutShipping = ({ checkoutPage, shippingCost, setShippingCost, setChec
                 <div className='d-flex align-items-center justify-content-between '>
                     <div className='d-flex align-items-center' onClick={() => setShippingCost(14.9)} >
                         {shippingCost === priorityShippingCost ?
-                            <FontAwesomeIcon icon={faCircleDot}/>
+                            <FontAwesomeIcon icon={faCircleDot} />
                             :
-                            <FontAwesomeIcon icon={faCircle} className='hover_link'/>
+                            <FontAwesomeIcon icon={faCircle} className='hover_link' />
                         }
                         <div className='ms-2'>Priority (2-3 working days)</div>
                     </div>

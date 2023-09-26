@@ -1,44 +1,43 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import '../cardDetail/CardDetail.css'
+import '../cardDetail/CardDetail.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane, faRotate } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faRotate } from '@fortawesome/free-solid-svg-icons';
 
-import { useSession } from '../../../middlewares/ProtectedRoutes'
+import { useSession } from '../../../middlewares/ProtectedRoutes';
 
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 
-/* reactBootstrap */
-import { Col, Container, Row, Spinner } from 'react-bootstrap'
 import AddToCartButton from '../../buttons/addToCartButton/AddToCartButton';
 
 const CardDetail = () => {
 
-  const { productId } = useParams()
+  const { productId } = useParams();
 
   const session = useSession();
 
-  const [productDetail, setProductDetail] = useState({})
+  const [productDetail, setProductDetail] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getProductDetail()
+    getProductDetail();
   }, [])
 
   const getProductDetail = async () => {
     try {
-      setIsLoading(true)
-      const data = await fetch(`http://localhost:5050/product/${productId}`)
-      const response = await data.json()
+      setIsLoading(true);
+      const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/product/${productId}`);
+      const response = await data.json();
       setProductDetail(response.productById);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  const { name, description, price, category, image, availability } = productDetail
+  const { name, description, price, category, image, availability } = productDetail;
 
   return (
     <div className='padding_top_100 pb-5 '>

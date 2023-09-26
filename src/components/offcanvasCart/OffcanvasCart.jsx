@@ -1,32 +1,39 @@
 import { useContext, useEffect } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useNavigate } from 'react-router-dom';
+
+import { useSession } from '../../middlewares/ProtectedRoutes';
+
+import { Container, Offcanvas } from 'react-bootstrap';
+
 import ProductCartCard from './productCartCard/ProductCartCard';
 
-import { CartProvider } from '../../context/CartContext'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { CartProvider } from '../../context/CartContext';
 import { ShippingCostProvider } from '../../context/ShippingCost';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 const OffcanvasCart = () => {
 
-  const { cartProducts, cartCounter, totalPrice, show, setShow, getCartProducts } = useContext(CartProvider)
-  const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider)
+  const session = useSession();
+
+  const { cartProducts, cartCounter, totalPrice, show, setShow, getCartProducts } = useContext(CartProvider);
+  const { freeShipping } = useContext(ShippingCostProvider);
 
   const handleClose = () => setShow(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   let Total = Math.round(((freeShipping - totalPrice) + Number.EPSILON) * 100) / 100;
 
   const checkOut = () => {
-    setShow(false)
-    navigate('/checkout')
+    setShow(false);
+    navigate('/checkout');
   }
 
   useEffect(() => {
-    getCartProducts()
+    if (session) {
+      getCartProducts(session.id);
+    }
   }, [cartCounter])
 
   return (
@@ -50,7 +57,7 @@ const OffcanvasCart = () => {
               </div>
               {totalPrice > freeShipping ?
                 <div className='fs-6 bg-green rounded p-1 d-flex align-items-center justify-content-center'>
-                  <FontAwesomeIcon icon={faPaperPlane} className='me-2'/>
+                  <FontAwesomeIcon icon={faPaperPlane} className='me-2' />
                   <div>Free shipping</div>
                 </div>
                 :
@@ -63,7 +70,6 @@ const OffcanvasCart = () => {
             :
             <div className='text-center py-4 fs-3'>.. add items to cart</div>
           }
-
         </Offcanvas.Body>
       </Offcanvas>
     </>

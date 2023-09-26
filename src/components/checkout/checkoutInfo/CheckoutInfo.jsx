@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { UsersProvider } from '../../../context/UserContext'
@@ -11,22 +11,22 @@ import { faChevronLeft, faPen, faPlus, faX } from '@fortawesome/free-solid-svg-i
 
 const CheckoutInfo = ({ checkoutPage, setCheckoutPage }) => {
 
-    const { setShow } = useContext(CartProvider)
-    const { user } = useContext(UsersProvider)
+    const { setShow } = useContext(CartProvider);
+    const { user } = useContext(UsersProvider);
 
-    const [ showModAddress, setShowModAddress ] = useState(false)
+    const [showModAddress, setShowModAddress] = useState(false);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const returnToCart = () => {
-        setShow(true)
-        navigate('/')
+        setShow(true);
+        navigate('/');
     }
 
     const goToShipping = () => {
-        if(user.shippingAddress){
-            setCheckoutPage("shipping")
-            setShowModAddress(false)
+        if (user.shippingAddress) {
+            setCheckoutPage("shipping");
+            setShowModAddress(false);
         }
     }
 
@@ -52,18 +52,18 @@ const CheckoutInfo = ({ checkoutPage, setCheckoutPage }) => {
             <div className='border rounded p-2 mb-4'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <h3>Shipping address</h3>
-                    {user.shippingAddress && !showModAddress?
-                        <FontAwesomeIcon icon={faPen} className='me-2 mb-1 hover_link' onClick={ ()=> setShowModAddress(true)}/>
+                    {user.shippingAddress && !showModAddress ?
+                        <FontAwesomeIcon icon={faPen} className='me-2 mb-1 hover_link' onClick={() => setShowModAddress(true)} />
                         :
                         null
                     }
                     {user.shippingAddress && showModAddress ?
-                        <FontAwesomeIcon icon={faX} className='me-2 mb-1 hover_link' onClick={ ()=> setShowModAddress(false)}/>
+                        <FontAwesomeIcon icon={faX} className='me-2 mb-1 hover_link' onClick={() => setShowModAddress(false)} />
                         :
                         null
                     }
                     {!user.shippingAddress ?
-                        <FontAwesomeIcon icon={faPlus} className='me-2 mb-1 hover_link' onClick={ ()=> setShowModAddress(true)}/>
+                        <FontAwesomeIcon icon={faPlus} className='me-2 mb-1 hover_link' onClick={() => setShowModAddress(true)} />
                         :
                         null
                     }
@@ -71,16 +71,16 @@ const CheckoutInfo = ({ checkoutPage, setCheckoutPage }) => {
                 {user.shippingAddress ?
                     <div className='d-flex'>
                         <div className='ellipsis'>{user.shippingAddress.address},</div>
-                        <div className='mx-1'>{user.shippingAddress.city},</div>
-                        <div className='mx-1'>{user.shippingAddress.zipCode},</div>
+                        <div className='mx-1 ellipsis'>{user.shippingAddress.city},</div>
+                        <div className='mx-1 d-none d-sm-block'>{user.shippingAddress.zipCode},</div>
                         <div>{user.shippingAddress.country},</div>
-                        <div className='mx-1'>{user.shippingAddress.state}</div>
+                        <div className='mx-1 d-none d-sm-block'>{user.shippingAddress.state}</div>
                     </div>
                     :
                     null
                 }
-                <div className={`mt-3 pt-3 border-top ${showModAddress ? null:'d-none'}`}>
-                    <AddUserAddress setShow={setShowModAddress}/>
+                <div className={`mt-3 pt-3 border-top ${showModAddress ? null : 'd-none'}`}>
+                    <AddUserAddress setShow={setShowModAddress} />
                 </div>
             </div>
             <div className='d-flex justify-content-between align-items-center mt-4'>

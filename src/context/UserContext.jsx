@@ -19,7 +19,7 @@ export const UsersContext = ({ children }) => {
     const getAllUsers = async ()=>{
         try {
             setIsLoading(true);
-            const data = await fetch(`http://localhost:5050/users`);
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users`);
             const response = await data.json();
             setUserCounter(response.counter);
             setAllUsers(response.users);
@@ -32,7 +32,7 @@ export const UsersContext = ({ children }) => {
     const getUserById = async () => {
         try {
             setIsLoading(true);
-            const data = await fetch(`http://localhost:5050/user/${session.id}`);
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/${session.id}`);
             const response = await data.json();
             setUser(response.userById);
         } catch (error) {

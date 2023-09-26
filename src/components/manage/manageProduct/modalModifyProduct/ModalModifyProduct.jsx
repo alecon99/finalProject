@@ -1,28 +1,31 @@
 import { useContext, useState, useEffect } from 'react'
+
 import { Button, Modal, Form } from 'react-bootstrap';
+
 import { ModalModifyProvider } from '../../../../context/ModalModifyProductContext';
 import { SelectedProductProvider } from '../../../../context/SelectedProduct';
+import { ProductsProvider } from '../../../../context/ProductsContext';
+
 import DeleteProductButton from '../../../buttons/deleteProduct/DeleteProductButton';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faX } from '@fortawesome/free-solid-svg-icons'
-import { ProductsProvider } from '../../../../context/ProductsContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 
 const ModalModifyProduct = () => {
 
-    const { show, setShow } = useContext(ModalModifyProvider)
-    const { selected, setSelected } = useContext(SelectedProductProvider)
-    const { getAllProducts } = useContext(ProductsProvider)
+    const { show, setShow } = useContext(ModalModifyProvider);
+    const { selected, setSelected } = useContext(SelectedProductProvider);
+    const { getAllProducts } = useContext(ProductsProvider);
 
-    const [buttonAvailable, setButtonAvailable] = useState("success")
-    const [buttonNotAvailable, setButtonNotAvailable] = useState("danger")
-    const [productFormData, setProductFormData] = useState({})
-    const [image, setImage] = useState(null)
+    const [buttonAvailable, setButtonAvailable] = useState("success");
+    const [buttonNotAvailable, setButtonNotAvailable] = useState("danger");
+    const [productFormData, setProductFormData] = useState({});
+    const [image, setImage] = useState(null);
 
     const handleClose = () => {
         setShow(false);
-        setSelected({})
-        setProductFormData({})
+        setSelected({});
+        setProductFormData({});
     }
 
     const funcionButtonAvailable = () => {
@@ -30,8 +33,8 @@ const ModalModifyProduct = () => {
             ...productFormData,
             availability: true
         })
-        setButtonNotAvailable("secondary")
-        setButtonAvailable("success")
+        setButtonNotAvailable("secondary");
+        setButtonAvailable("success");
     }
 
     const funcionButtonNotAvailable = () => {
@@ -39,23 +42,23 @@ const ModalModifyProduct = () => {
             ...productFormData,
             availability: false
         })
-        setButtonNotAvailable("danger")
-        setButtonAvailable("secondary")
+        setButtonNotAvailable("danger");
+        setButtonAvailable("secondary");
     }
 
     useEffect(() => {
         if (selected.availability) {
-            setButtonNotAvailable("secondary")
-            setButtonAvailable("success")
+            setButtonNotAvailable("secondary");
+            setButtonAvailable("success");
         }
         if (!selected.availability) {
-            setButtonNotAvailable("danger")
-            setButtonAvailable("secondary")
+            setButtonNotAvailable("danger");
+            setButtonAvailable("secondary");
         }
     }, [selected])
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0])
+        setImage(e.target.files[0]);
     }
 
     const uploadImage = async (image) => {
@@ -63,7 +66,7 @@ const ModalModifyProduct = () => {
         fileData.append("image", image);
 
         try {
-            const response = await fetch(`http://localhost:5050/image/cloudUploadImg`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/image/cloudUploadImg`, {
                 method: "POST",
                 body: fileData,
             });
@@ -84,28 +87,28 @@ const ModalModifyProduct = () => {
                     image: uploadedImage.image,
                 }
 
-                const response = await fetch(`http://localhost:5050/modProduct/${selected._id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-                getAllProducts()
+                const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/modProduct/${selected._id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                });
+                getAllProducts();
                 setShow(false);
             } catch (error) {
                 console.error("Failed to save the post");
             }
         } else {
             try {
-                const response = await fetch(`http://localhost:5050/modProduct/${selected._id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(productFormData),
-            });
-                getAllProducts()
+                const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/modProduct/${selected._id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(productFormData),
+                });
+                getAllProducts();
                 setShow(false);
             } catch (error) {
                 console.error("Failed to save the post");
@@ -139,7 +142,7 @@ const ModalModifyProduct = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicDescription">
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label>Description (min: 5 characters)</Form.Label>
                             <textarea rows={5} cols={55} className='d-flex border rounded' placeholder={selected.description} type="text" onChange={(e) => setProductFormData({
                                 ...productFormData,
                                 description: e.target.value

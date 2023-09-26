@@ -1,31 +1,32 @@
-import { useState, useEffect, useContext } from 'react'
-import { Spinner, Container, Button } from 'react-bootstrap'
+import { useState, useEffect, useContext } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBoxOpen, faBagShopping, faCircleCheck, faGears, faTruck, faChevronUp, faChevronDown, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { ShippingCostProvider } from '../../../context/ShippingCost'
+import { Spinner, Container } from 'react-bootstrap';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxOpen, faCircleCheck, faTruck, faChevronUp, faChevronDown, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
+import { ShippingCostProvider } from '../../../context/ShippingCost';
 
 const ManageOrder = () => {
 
-    const [allOrders, setAllOrders] = useState([])
-    const [allOrdersCounter, setAllOrdersCounter] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const [orderState, setOrderState] = useState(null)
-    const [showCart, setShowCart] = useState(null)
+    const [allOrders, setAllOrders] = useState([]);
+    const [allOrdersCounter, setAllOrdersCounter] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [orderState, setOrderState] = useState(null);
+    const [showCart, setShowCart] = useState(null);
 
-    const { standardShippingCost } = useContext(ShippingCostProvider)
+    const { standardShippingCost } = useContext(ShippingCostProvider);
 
     const getAllOrders = async () => {
         try {
-            setIsLoading(true)
-            const data = await fetch(`http://localhost:5050/orders`)
-            const response = await data.json()
-            setAllOrders(response.orders)
-            setAllOrdersCounter(response.counter)
-            setIsLoading(false)
+            setIsLoading(true);
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/orders`);
+            const response = await data.json();
+            setAllOrders(response.orders);
+            setAllOrdersCounter(response.counter);
+            setIsLoading(false);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -36,22 +37,22 @@ const ManageOrder = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5050/modOrder/${orderState.orderId}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/modOrder/${orderState.orderId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
             });
-            getAllOrders()
-            setOrderState(null)
+            getAllOrders();
+            setOrderState(null);
         } catch (error) {
             console.error("Failed to save the post");
         }
     }
 
     useEffect(() => {
-        getAllOrders()
+        getAllOrders();
     }, [])
 
     return (
@@ -72,7 +73,7 @@ const ManageOrder = () => {
                                 {orderState && orderState.orderId === order._id ?
                                     <div className='d-flex border rounded p-1 justify-content-around mb-3'>
                                         <div className='fw-bolder hover_link' onClick={modOrder}>Save</div>
-                                        <div className='fw-bolder hover_link_red' onClick={()=> setOrderState(null)}>Cancel</div>
+                                        <div className='fw-bolder hover_link_red' onClick={() => setOrderState(null)}>Cancel</div>
                                     </div>
                                     :
                                     null

@@ -1,51 +1,43 @@
 import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { Col, Container, Row } from 'react-bootstrap'
+import { Container } from 'react-bootstrap';
 
 import { CartProvider } from '../../../context/CartContext';
 import { AdminProvider } from '../../../context/AdminContext';
 
 const UserMenu = ({ setUserMenuShow }) => {
 
-    const { setShow, cartCounter } = useContext(CartProvider)
-    const { adminRole } = useContext(AdminProvider)
+    const { setShow, cartCounter } = useContext(CartProvider);
+    const { adminRole } = useContext(AdminProvider);
 
     const navigate = useNavigate();
 
     const handleShow = () => {
-        setUserMenuShow(false)
+        setUserMenuShow(false);
         setShow(true);
     }
 
     const disconnect = () => {
-        setUserMenuShow(false)
+        setUserMenuShow(false);
         navigate('/disconnect');
     }
 
     return (
         <Container className='my-2 border-top'>
-            <div className='d-flex justify-content-center flex-wrap text-white pt-3'>
-
+            <div className='d-flex justify-content-evenly flex-wrap text-white pt-3'>
                 <div className='mx-2 hover_link_red text-nowrap' onClick={disconnect}>
                     | Disconnect |
                 </div>
-
-
                 <Link className='mx-2 hover_link text-decoration-none text-white text-nowrap' to={'/userData'}>
                     | MyData |
                 </Link>
-
-
                 <Link className='mx-2 hover_link text-decoration-none text-white text-nowrap' to={'/userOrders'}>
                     | MyOrders |
                 </Link>
-
-
                 <div onClick={handleShow} className='mx-2 hover_link text-nowrap'>
                     | Cart <span className='green'>{cartCounter}</span> |
                 </div>
-
             </div>
             <div className={`pt-3 ${adminRole ? null : 'd-none'}`}>
                 <div className='border-top text-center text-white fs-5 pt-3'>Management</div>

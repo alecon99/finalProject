@@ -1,19 +1,20 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap';
 
-import { ModalModifyProvider } from '../../../../context/ModalModifyProductContext'
-import { SelectedProductProvider } from '../../../../context/SelectedProduct'
+import { ModalModifyProvider } from '../../../../context/ModalModifyProductContext';
+import { SelectedProductProvider } from '../../../../context/SelectedProduct';
 
-import '../cardModifyProduct/CardModifyProduct.css'
+import '../cardModifyProduct/CardModifyProduct.css';
 
 const CardModifyproduct = ({ product }) => {
-    const { setShow } = useContext(ModalModifyProvider)
-    const { setSelected } = useContext(SelectedProductProvider)
+
+    const { setShow } = useContext(ModalModifyProvider);
+    const { setSelected } = useContext(SelectedProductProvider);
 
     const showForm = () => {
         setShow(true);
-        setSelected(product)
+        setSelected(product);
     }
 
     return (

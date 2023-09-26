@@ -1,18 +1,18 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react';
 
-import { Container, Spinner } from 'react-bootstrap'
+import { Container, Spinner } from 'react-bootstrap';
 
-import CardModifyproduct from './cardModifyProduct/CardModifyproduct'
-import AddProduct from '../../buttons/addProduct/AddProduct'
+import CardModifyproduct from './cardModifyProduct/CardModifyproduct';
+import AddProduct from '../../buttons/addProduct/AddProduct';
 
-import { ProductsProvider } from '../../../context/ProductsContext'
+import { ProductsProvider } from '../../../context/ProductsContext';
 
 const ManageProduct = () => {
 
-    const { allProducts, productsCounter, isLoading, getAllProducts } = useContext(ProductsProvider)
+    const { allProducts, productsCounter, isLoading, getAllProducts } = useContext(ProductsProvider);
 
     useEffect(() => {
-        getAllProducts()
+        getAllProducts();
     }, [])
 
     return (
