@@ -2,9 +2,9 @@ import { useEffect, useState, useContext } from 'react';
 
 import { Button, Container } from 'react-bootstrap';
 
-import { useSession } from '../../../middlewares/ProtectedRoutes';
-
 import { ShippingCostProvider } from '../../../context/ShippingCost';
+
+import { useSession } from '../../../middlewares/ProtectedRoutes';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxOpen, faBagShopping, faCircleCheck, faGears, faTruck, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
