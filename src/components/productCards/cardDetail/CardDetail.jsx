@@ -11,6 +11,7 @@ import { useSession } from '../../../middlewares/ProtectedRoutes';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
 
 import AddToCartButton from '../../buttons/addToCartButton/AddToCartButton';
+import CardsRecommended from '../cardsRecommended/CardsRecommended';
 
 const CardDetail = () => {
 
@@ -70,13 +71,13 @@ const CardDetail = () => {
                 <div><FontAwesomeIcon icon={faPaperPlane} /> Free shipping from €50</div>
                 <div><FontAwesomeIcon icon={faRotate} /> Easy returns within 60 days</div>
                 <Row>
-                  <Col lg={6}>
+                  <Col lg={6} xl={8}>
                     <div className='fs-1'>
                       € {price}
                       <span className='fs-6 ms-2'>TAX incl.</span>
                     </div>
                   </Col>
-                  <Col lg={6} className='px-5 py-2 px-sm-0'>
+                  <Col lg={6} xl={4} className='px-5 py-2 px-sm-0'>
                     {availability && session ?
                       <AddToCartButton
                         productId={productId}
@@ -104,6 +105,8 @@ const CardDetail = () => {
               </div>
             </Col>
           </Row>
+          <div className='mt-5 pt-5 mb-3 border-bottom text-center fs-2'>Recommended products</div>
+          <CardsRecommended category={category} />
         </Container>
       }
     </div>

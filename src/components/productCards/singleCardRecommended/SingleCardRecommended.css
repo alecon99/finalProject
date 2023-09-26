@@ -1,0 +1,28 @@
+#container_recommended_img{
+    overflow: hidden;
+}
+
+#card_recommended_img{
+    object-fit: cover;
+    height: 200px;
+}
+
+#card_recommended_title{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 70%;
+}
+
+#card_recommended_img:hover{
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+#not_available_recommended{
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}

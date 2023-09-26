@@ -12,14 +12,14 @@ const Jumbotron = () => {
     <div >
       <video id='jumbotron_container' src={videoBg} autoPlay loop muted ></video>
       <div id='jumbotron_title_xl' className='text-white d-none d-xl-block' >
-        <div className='hover_black'>"Green</div>
+        <div>"<span className='hover_black'>Green</span></div>
         <div className='text-nowrap'>is the new</div>
-        <div className='hover_green text-end'>Black"</div>
+        <div className='text-end'><span className='hover_green'>Black</span>"</div>
       </div>
       <div id='jumbotron_title_md' className='text-white d-none d-md-block d-xl-none' >
-        <div className='hover_black'>"Green</div>
+        <div>"<span className='hover_black'>Green</span></div>
         <div className='text-nowrap'>is the new</div>
-        <div className='hover_green text-end'>Black"</div>
+        <div className='text-end'><span className='hover_green'>Black</span>"</div>
       </div>
       <div id='jumbotron_title_xs' className='text-white d-md-none ' >
         <div>"Green</div>

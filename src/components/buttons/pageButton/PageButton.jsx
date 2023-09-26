@@ -4,7 +4,7 @@ import { PageSizeProvider } from '../../../context/PageSizeContext'
 import { ProductsProvider } from '../../../context/ProductsContext'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 import { Container, Spinner } from 'react-bootstrap'
 
@@ -27,7 +27,10 @@ const PageButton = () => {
           }
         </div>
         :
-        null
+        <a href='#' className='hover_link text-black text-decoration-none'>
+          <FontAwesomeIcon icon={faChevronUp} />
+          <div>Scroll up</div>
+        </a>
       }
     </Container>
   )
