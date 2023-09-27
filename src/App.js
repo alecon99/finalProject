@@ -24,6 +24,8 @@ import OrderCompletedPage from './pages/OrderCompletedPage';
 import UserOrdersPage from './pages/UserOrdersPage';
 import ManageOrdersPage from './pages/ManageOrdersPage';
 
+import ScrollToTop from './middlewares/ScrollToTop';
+
 function App() {
   return (
     <PageSizeContext>
@@ -35,6 +37,7 @@ function App() {
                 <SelectedProductContex>
                   <ShippingCostContext>
                     <BrowserRouter>
+                      <ScrollToTop />
                       <Routes>
                         <Route
                           exact path='/'
