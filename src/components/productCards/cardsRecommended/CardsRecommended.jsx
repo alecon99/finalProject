@@ -9,6 +9,10 @@ const CardsRecommended = ({ category }) => {
     const [recommendedProducts, serRecommendedProducts] = useState({})
     const [isLoading, setIsLoading] = useState(false)
 
+    useEffect(() => {
+        getRecommendedProduct();
+    },[])
+
     const getRecommendedProduct = async () => {
         try {
             setIsLoading(true)
@@ -20,10 +24,6 @@ const CardsRecommended = ({ category }) => {
             console.log(error);
         }
     }
-
-    useEffect(() => {
-        getRecommendedProduct();
-    }, [])
 
     return (
         <Row >
