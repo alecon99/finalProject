@@ -4,6 +4,13 @@
     width: 100%;
 }
 
+#jumbotron_container_sm{
+    object-fit: cover;
+    height: 100vh;
+    width: 100%;
+    background-image: url(../../media/background1.jpeg);
+}
+
 #scroll_button{
     position: absolute;
     top: 97vh;

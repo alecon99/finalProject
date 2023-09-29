@@ -10,7 +10,8 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 const Jumbotron = () => {
   return (
     <div >
-      <video id='jumbotron_container' src={videoBg} autoPlay loop muted ></video>
+      <div id='jumbotron_container_sm' className='d-sm-none'></div>
+      <video id='jumbotron_container' className='d-none d-sm-block' src={videoBg} autoPlay loop muted ></video>
       <div id='jumbotron_title_xl' className='text-white d-none d-xl-block' >
         <div>"<span className='hover_black'>Green</span></div>
         <div className='text-nowrap'>is the new</div>
