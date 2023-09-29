@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { Col } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 
 import { CartProvider } from '../../../context/CartContext'
 import { ShippingCostProvider } from '../../../context/ShippingCost'
@@ -79,18 +79,18 @@ const CheckoutProducts = ({ shippingCost }) => {
                     }
                 </div>
             </div>
-            <div className='bg-white border rounded mx-md-5 my-4 p-3 text-center d-flex'>
-                <div className='packages_info p-1'>
+            <Row className='bg-white border rounded mx-md-5 my-4 p-3 text-center'>
+                <Col className='packages_info p-1'>
                     <FontAwesomeIcon icon={faRotate} className='fs-1 mb-2' />
                     <div className='fw-bold'>Free return</div>
                     <div className='text-secondary font_size_xs'>Don't like the product? Make a return easily and free of charge.</div>
-                </div>
-                <div className='packages-info p-1'>
+                </Col>
+                <Col className='packages-info p-1'>
                     <FontAwesomeIcon icon={faBoxOpen} className='fs-1 mb-2' />
                     <div className='fw-bold'>Eco-friendly</div>
                     <div className='text-secondary font_size_xs'>The packaging comes from recycled materials.</div>
-                </div>
-            </div>
+                </Col>
+            </Row>
         </Col>
     )
 }

@@ -60,16 +60,18 @@ const CardDetail = () => {
                 <div className='fs-2'>{name}</div>
                 <div className='py-2'>| {category} |</div>
                 <div className='py-2 border-top text-secondary'>DESCRIPTION</div>
-                <div className=' '>{description}</div>
+                <div >{description}</div>
               </div>
               <div className='border-top pt-2'>
-                {availability ?
-                  null
-                  :
-                  <div className='text-danger pb-2'>Product currently not available</div>
-                }
-                <div><FontAwesomeIcon icon={faPaperPlane} /> Free shipping from €50</div>
-                <div><FontAwesomeIcon icon={faRotate} /> Easy returns within 60 days</div>
+                <div className='py-4 py-md-0'>
+                  {availability ?
+                    null
+                    :
+                    <div className='text-danger pb-2'>Product currently not available</div>
+                  }
+                  <div><FontAwesomeIcon icon={faPaperPlane} /> Free shipping from €50</div>
+                  <div><FontAwesomeIcon icon={faRotate} /> Easy returns within 60 days</div>
+                </div>
                 <Row>
                   <Col lg={6} xl={8}>
                     <div className='fs-1'>
