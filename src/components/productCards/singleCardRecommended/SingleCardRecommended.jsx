@@ -1,16 +1,14 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
 import '../singleCardRecommended/SingleCardRecommended.css';
 
 const SingleCardRecommended = ({ productProps }) => {
 
-    const detail = () => {
-        window.open(`/detail/${productProps._id}`, "_blank", "noreferrer");
-    }
-    return (
-      <Card className='border-0 my-3' onClick={detail}>
+  return (
+    <Link to={`/detail/${productProps._id}`} target='_blank'>
+      <Card className='border-0 my-3' >
         <div id='container_recommended_img' className='border'>
           {productProps.availability ?
             null
@@ -26,7 +24,8 @@ const SingleCardRecommended = ({ productProps }) => {
           </div>
         </Card.Body>
       </Card>
-    )
+    </Link>
+  )
 }
 
 export default SingleCardRecommended

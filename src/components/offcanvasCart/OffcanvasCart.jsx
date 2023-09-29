@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useSession } from '../../middlewares/ProtectedRoutes';
 
@@ -21,14 +21,8 @@ const OffcanvasCart = () => {
   const { freeShipping } = useContext(ShippingCostProvider);
 
   const handleClose = () => setShow(false);
-  const navigate = useNavigate();
 
   let Total = Math.round(((freeShipping - totalPrice) + Number.EPSILON) * 100) / 100;
-
-  const checkOut = () => {
-    setShow(false);
-    navigate('/checkout');
-  }
 
   useEffect(() => {
     if (session) {
@@ -65,7 +59,7 @@ const OffcanvasCart = () => {
                   <div>€ {Total} missing for free shipping</div>
                 </div>
               }
-              <div onClick={checkOut} className='bg-dark hover_link text-white rounded p-2 mt-3'>CHECKOUT</div>
+              <Link to={'/checkout'} onClick={()=> setShow(false)} className='d-block text-decoration-none bg-dark hover_link text-white rounded p-2 mt-3'>CHECKOUT</Link>
             </Container>
             :
             <div className='text-center py-4 fs-3'>.. add items to cart</div>
