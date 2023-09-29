@@ -7,7 +7,7 @@ import '../singleCardRecommended/SingleCardRecommended.css';
 const SingleCardRecommended = ({ productProps }) => {
 
   return (
-    <Link to={`/detail/${productProps._id}`} target='_blank'>
+    <Link to={`/detail/${productProps._id}`} target='_blank' className='text-decoration-none'>
       <Card className='border-0 my-3' >
         <div id='container_recommended_img' className='border'>
           {productProps.availability ?
