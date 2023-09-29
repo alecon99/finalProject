@@ -21,7 +21,7 @@ const Checkout = () => {
     const { totalPrice, getCartProducts } = useContext(CartProvider);
     const { standardShippingCost, freeShipping } = useContext(ShippingCostProvider);
 
-    const { getUserById } = useContext(UsersProvider);
+    const { user, getUserById } = useContext(UsersProvider);
 
     const [checkoutPage, setCheckoutPage] = useState("info");
     const [shippingCost, setShippingCost] = useState(null);
@@ -38,7 +38,7 @@ const Checkout = () => {
         isShippingFree();
         getCartProducts();
         getUserById();
-    }, [])
+    }, [user])
 
     return (
         <Row id='checkout_container'>
