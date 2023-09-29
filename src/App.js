@@ -23,6 +23,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import OrderCompletedPage from './pages/OrderCompletedPage';
 import UserOrdersPage from './pages/UserOrdersPage';
 import ManageOrdersPage from './pages/ManageOrdersPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 import ScrollToTop from './middlewares/ScrollToTop';
 
@@ -42,6 +43,10 @@ function App() {
                         <Route
                           exact path='/'
                           element={<Homepage />}
+                        />
+                        <Route 
+                          path='*' 
+                          element={<NotFoundPage />}
                         />
                         <Route
                           path='/detail/:productId'
