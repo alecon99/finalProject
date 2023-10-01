@@ -45,7 +45,7 @@ const NavigationBar = () => {
           </div>
           :
           <div>
-            <Link className='hover_link text-white text-decoration-none fs-5' to={"/login"}>Sign in</Link>
+            <Link className='hover_link text-white text-decoration-none fs-5' to={"/login"}>Log in</Link>
             <div>
               or <Link to={'/registration'} className="hover_link text-secondary text-decoration-none">create an account</Link>
             </div>

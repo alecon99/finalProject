@@ -15,6 +15,7 @@ const CheckoutInfo = ({ checkoutPage, setCheckoutPage }) => {
     const { user } = useContext(UsersProvider);
 
     const [showModAddress, setShowModAddress] = useState(false);
+    const [ addAddress, setAddAddress ] = useState(false)
 
     const navigate = useNavigate();
 
@@ -27,6 +28,9 @@ const CheckoutInfo = ({ checkoutPage, setCheckoutPage }) => {
         if (user.shippingAddress) {
             setCheckoutPage("shipping");
             setShowModAddress(false);
+            setAddAddress(false)
+        } else {
+            setAddAddress(true)
         }
     }
 
@@ -83,6 +87,11 @@ const CheckoutInfo = ({ checkoutPage, setCheckoutPage }) => {
                     <AddUserAddress setShow={setShowModAddress} />
                 </div>
             </div>
+            {!addAddress ?
+                    null
+                    :
+                    <div className='border border-danger rounded text-center text-danger'>Add an address to continue !</div>
+                }
             <div className='d-flex justify-content-between align-items-center mt-4'>
                 <div onClick={returnToCart} className='hover_link d-flex align-items-center'>
                     <FontAwesomeIcon icon={faChevronLeft} />

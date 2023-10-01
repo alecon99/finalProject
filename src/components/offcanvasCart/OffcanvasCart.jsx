@@ -56,7 +56,7 @@ const OffcanvasCart = () => {
                 </div>
                 :
                 <div className='fs-6 bg-green rounded p-1 d-flex align-items-center justify-content-center'>
-                  <div>€ {Total} missing for free shipping</div>
+                  <div>€ {Total} for free shipping</div>
                 </div>
               }
               <Link to={'/checkout'} onClick={()=> setShow(false)} className='d-block text-decoration-none bg-dark hover_link text-white rounded p-2 mt-3'>CHECKOUT</Link>

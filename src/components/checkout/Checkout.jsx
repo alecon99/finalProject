@@ -41,6 +41,7 @@ const Checkout = () => {
     }, [])
 
     return (
+        <div className='overflow-hidden'>
         <Row id='checkout_container'>
             <CheckoutProducts
                 shippingCost={shippingCost}
@@ -115,6 +116,7 @@ const Checkout = () => {
                 </div>
             </Col>
         </Row>
+        </div>
     )
 }
 

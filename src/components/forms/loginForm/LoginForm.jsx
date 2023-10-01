@@ -63,7 +63,7 @@ const LoginForms = () => {
                                 </Form.Group>
                                 <div className='d-flex align-items-center'>
                                     <Button variant='dark' type="submit">
-                                        Login
+                                        Log in
                                     </Button>
                                     {alertMessage ?
                                         <div className='ms-2 text-danger'>Incorrect email or password !</div>

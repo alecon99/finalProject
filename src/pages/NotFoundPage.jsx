@@ -10,7 +10,7 @@ const NotFoundPage = () => {
             <div>error</div>
             <h1 className='fw-bold green'>404</h1>
             <div>PAGE NOT FOUND</div>
-            <div className='mt-5 fs-4'>( return to home )</div>
+            <div className='mt-5 fs-4'>return to home</div>
         </div>
         <Homebutton/>
     </>

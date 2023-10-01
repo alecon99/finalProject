@@ -111,7 +111,7 @@ const LoginForms = () => {
                                 </Form.Group>
                                 <div className='d-flex align-items-center'>
                                     <Button variant="dark" onClick={verifyCredentials}>
-                                        sign in
+                                        Sign in
                                     </Button>
                                     {error ?
                                         <div className='ms-3 text-danger'>Enter the data correctly</div>
