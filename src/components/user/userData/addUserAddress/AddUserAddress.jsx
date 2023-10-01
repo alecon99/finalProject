@@ -25,6 +25,12 @@ const AddUserAddress = ({ setShow }) => {
             setState(user.shippingAddress.state);
             setZipCode(user.shippingAddress.zipCode);
             setCountry(user.shippingAddress.country);
+        } else {
+            setAddress(null);
+            setCity(null);
+            setState(null);
+            setZipCode(null);
+            setCountry(null);
         }
     }, [user])
 

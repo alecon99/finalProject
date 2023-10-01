@@ -13,7 +13,7 @@ const CheckoutShipping = ({ checkoutPage, shippingCost, setShippingCost, setChec
     const { user } = useContext(UsersProvider);
     const { totalPrice } = useContext(CartProvider);
     const { standardShippingCost, priorityShippingCost, freeShipping } = useContext(ShippingCostProvider);
-
+    
     const itIsFree = () => {
         if (totalPrice < freeShipping) {
             setShippingCost(standardShippingCost);
@@ -81,7 +81,7 @@ const CheckoutShipping = ({ checkoutPage, shippingCost, setShippingCost, setChec
                     }
                 </div>
                 <div className='d-flex align-items-center justify-content-between '>
-                    <div className='d-flex align-items-center' onClick={() => setShippingCost(14.9)} >
+                    <div className='d-flex align-items-center' onClick={() => setShippingCost(priorityShippingCost)} >
                         {shippingCost === priorityShippingCost ?
                             <FontAwesomeIcon icon={faCircleDot} />
                             :

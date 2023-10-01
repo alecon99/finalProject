@@ -6,10 +6,12 @@ import { useSession } from '../middlewares/ProtectedRoutes'
 import { Spinner } from 'react-bootstrap';
 
 import { AdminProvider } from '../context/AdminContext';
+import { UsersProvider } from '../context/UserContext';
 
 const SuccessLogin = () => {
 
     const { setAdminRole } = useContext(AdminProvider);
+    const { getUserById } = useContext(UsersProvider);
 
     const session = useSession();
     const navigate = useNavigate();
@@ -17,6 +19,7 @@ const SuccessLogin = () => {
     const Timeout = () => {
         setTimeout(redirect, 3000);
         isAdmin();
+        getUserById()
     }
 
     const redirect = () => {
