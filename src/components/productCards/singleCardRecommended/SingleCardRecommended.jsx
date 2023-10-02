@@ -1,13 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
 import '../singleCardRecommended/SingleCardRecommended.css';
 
 const SingleCardRecommended = ({ productProps }) => {
 
+  const navigate = useNavigate();
+
+  const navigateToProduct = ()=>{
+    navigate(`/detail/${productProps._id}`)
+    window.location.reload()
+  }
+
   return (
-    <Link to={`/detail/${productProps._id}`} target='_blank' className='text-decoration-none'>
+    <div onClick={navigateToProduct}>
       <Card className='border-0 my-3' >
         <div id='container_recommended_img' className='border'>
           {productProps.availability ?
@@ -24,7 +31,7 @@ const SingleCardRecommended = ({ productProps }) => {
           </div>
         </Card.Body>
       </Card>
-    </Link>
+    </div>
   )
 }
 
